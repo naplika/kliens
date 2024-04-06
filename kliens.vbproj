@@ -29,12 +29,16 @@
       <None Remove="N.png" />
       <None Remove="N.ico" />
       <None Remove="crowdin.yml" />
+      <None Remove="kliens.sln.DotSettings" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Update="i18n.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>i18n.Designer.vb</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="i18n.hu.resx">
+        <DependentUpon>i18n.resx</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
 

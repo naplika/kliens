@@ -1,3 +1,5 @@
 files:
   - source: /i18n.resx
     translation: /i18n.%two_letters_code%.resx
+bundles:
+  - 2
