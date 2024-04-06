@@ -10,7 +10,10 @@ Public Module FirstStartup
         Console.WriteLine("Can't find your language? Check https://github.com/naplika/kliens")
         dim selected as string = console.ReadLine()
         dim jsonobj as JsonObject = new JsonObject()
+        jsonobj.Add("configrev", "1")
         jsonobj.Add("firstStartup", "true")
+        jsonobj.Add("user", "guest")
+        jsonobj.Add("school", "Naplika")
         if selected = "1" Then
             jsonobj.Add("language", "hu")
             dim jsonstring as string = jsonobj.ToString()

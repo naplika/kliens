@@ -6,6 +6,7 @@ imports kliens.SharedElements
 Module Program
     dim ReadOnly Lang as string = GetSettings("language")
     Sub Main(args As String())
+        Console.TreatControlCAsInput = true
         Console.Clear()
         firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
@@ -32,8 +33,10 @@ Module Program
     End function
 
     private sub Commandmode()
+        dim username as string = GetSettings("user")
+        dim school as string = GetSettings("school")
         Console.ForegroundColor = consolecolor.Gray
-        Console.Write("Naplika> ")
+        Console.Write("{0}@{1}> ", username, school)
         dim command as new StringBuilder
         console.ForegroundColor = ConsoleColor.Yellow
         While True
@@ -42,6 +45,9 @@ Module Program
                 console.WriteLine()
                 Console.WriteLine(command)
                 Exit While
+            elseIf keyInfo.Key = ConsoleKey.C AndAlso keyInfo.Modifiers = ConsoleModifiers.Control Then
+                Console.ForegroundColor = ConsoleColor.Gray
+                Environment.Exit(0)
             ElseIf keyInfo.Key = ConsoleKey.Backspace Then
                 If command.Length > 0 Then
                     command.Remove(command.Length - 1, 1)
