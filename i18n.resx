@@ -30,4 +30,16 @@
     <data name="cmdnotfound" xml:space="preserve">
         <value>Command not found. (Try help)</value>
     </data>
+    <data name="filecached" xml:space="preserve">
+        <value>There was already a cached version that was updated %s of hours ago.</value>
+    </data>
+    <data name="searchhit" xml:space="preserve">
+        <value>Hit %s</value>
+    </data>
+    <data name="morethan1school" xml:space="preserve">
+        <value>The command found more than 1 school (%s).</value>
+    </data>
+    <data name="bespecific" xml:space="preserve">
+        <value>If possible, be a little more specific with the name.</value>
+    </data>
 </root>
