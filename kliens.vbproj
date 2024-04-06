@@ -22,10 +22,24 @@
     <ItemGroup>
       <None Remove="README.md" />
       <None Remove="LICENSE" />
+      <None Remove="global.json" />
+      <None Remove="naplika.snk" />
+      <None Remove="kliens.vbproj.DotSettings" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="i18n\" />
+      <EmbeddedResource Update="i18n.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>i18n.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="i18n.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>i18n.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
