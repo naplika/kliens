@@ -24,4 +24,7 @@
     <data name="changessaved" xml:space="preserve">
         <value>Settings saved.</value>
     </data>
+    <data name="welcome" xml:space="preserve">
+        <value>Welcome to Naplika!</value>
+    </data>
 </root>

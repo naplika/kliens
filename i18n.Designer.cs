@@ -80,5 +80,14 @@ Namespace kliens
                 Return ResourceManager.GetString("helloworld", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Welcome to Naplika!.
+        '''</summary>
+        Friend Shared ReadOnly Property welcome() As String
+            Get
+                Return ResourceManager.GetString("welcome", resourceCulture)
+            End Get
+        End Property
     End Class
 End Namespace

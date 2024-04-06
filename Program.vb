@@ -1,12 +1,13 @@
 Imports System
-imports System.Text
 Imports System.IO
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 Module Program
+    dim ReadOnly Lang as string = GetSettings("language")
     Sub Main(args As String())
         Console.Clear()
         firstStartupCheck()
+        Console.WriteLine(GetTranslation("welcome", Lang))
     End Sub
 
     Private function FirstStartupCheck()
@@ -20,5 +21,11 @@ Module Program
             firstStartup.welcome()
         End If
         return True
+    End function
+
+    private function GetSettings(q as string) as String
+        dim jsonstring as string = file.ReadAllText(Settingspath)
+        dim jsonobject as jobject = JObject.Parse(jsonstring)
+        return jsonobject(q).ToString()
     End function
 End Module
