@@ -49,6 +49,7 @@ Module Program
                 Commandmode()
             elseIf keyInfo.Key = ConsoleKey.C AndAlso keyInfo.Modifiers = ConsoleModifiers.Control Then
                 Console.ForegroundColor = ConsoleColor.Gray
+                Console.WriteLine()
                 Environment.Exit(0)
             ElseIf keyInfo.Key = ConsoleKey.Backspace Then
                 If command.Length > 0 Then
@@ -56,6 +57,8 @@ Module Program
                     Console.Write(vbBack)
                     Console.Write(" ")
                     Console.Write(vbBack)
+                    Else 
+                        Console.Beep()
                 End If
                 Continue While
             End If

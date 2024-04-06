@@ -11,7 +11,7 @@
         <Company>Naplika</Company>
         <Product>Kliens</Product>
         <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>naplika.snk</AssemblyOriginatorKeyFile>
+        <AssemblyOriginatorKeyFile>main.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
         <ApplicationIcon>N.ico</ApplicationIcon>
     </PropertyGroup>
