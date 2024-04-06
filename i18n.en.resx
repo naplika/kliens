@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="helloworld">
-    <value>Üdv Világ!</value>
+    <value>Hello World!</value>
   </data>
   <data name="changessaved">
-    <value>Beállítások mentve.</value>
+    <value>Settings saved.</value>
   </data>
   <data name="welcome">
-    <value>Üdv a Naplikában!</value>
+    <value>Welcome to Naplika!</value>
   </data>
 </root>
