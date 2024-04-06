@@ -13,7 +13,7 @@
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>naplika.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
-        <ApplicationIcon>N.png</ApplicationIcon>
+        <ApplicationIcon>N.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,6 +27,7 @@
       <None Remove="naplika.snk" />
       <None Remove="kliens.vbproj.DotSettings" />
       <None Remove="N.png" />
+      <None Remove="N.ico" />
     </ItemGroup>
 
     <ItemGroup>
