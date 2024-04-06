@@ -16,11 +16,12 @@ Friend MustInherit Class SharedElements
     End Function
 
     public shared function GetTranslation(query as string, lang as string) as String
+        Dim originalCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture
         System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
         Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
         Dim result As String = rm.GetString(query)
-        if result = nothing Then
-            System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("default")
+        if result.Length <= 0 Then
+            System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
             result = rm.GetString(query)
         End If
         return result
