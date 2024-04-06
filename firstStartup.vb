@@ -15,17 +15,18 @@ Public Module FirstStartup
             jsonobj.Add("language", "hu")
             dim jsonstring as string = jsonobj.ToString()
             File.WriteAllText(Settingspath, jsonstring)
-            Console.WriteLine(GetTranslation("pleaserestart", "hu"))
+            Console.WriteLine(GetTranslation("changessaved", "hu"))
         elseif selected = "2" Then
             jsonobj.Add("language", "en")
             dim jsonstring as string = jsonobj.ToString()
             File.WriteAllText(Settingspath, jsonstring)
-            Console.WriteLine(GetTranslation("pleaserestart", "en"))
+            Console.WriteLine(GetTranslation("changessaved", "en"))
         Else
             Console.Clear()
             Console.WriteLine("Invalid input. Please only input the number.")
             Console.WriteLine()
             Welcome()
         End If
+        Environment.Exit(0)
     End sub
 End Module
