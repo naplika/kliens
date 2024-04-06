@@ -43,8 +43,10 @@ Module Program
             Dim keyInfo As ConsoleKeyInfo = Console.ReadKey(True)
             If keyInfo.Key = ConsoleKey.Enter Then
                 console.WriteLine()
-                Console.WriteLine(command)
-                Exit While
+                dim commandarray as string() = command.ToString().Split(" ")
+                Commandparser.Parsecommand(commandarray)
+                command.Clear()
+                Commandmode()
             elseIf keyInfo.Key = ConsoleKey.C AndAlso keyInfo.Modifiers = ConsoleModifiers.Control Then
                 Console.ForegroundColor = ConsoleColor.Gray
                 Environment.Exit(0)
@@ -60,6 +62,5 @@ Module Program
             command.Append(keyInfo.KeyChar)
             Console.Write(keyInfo.KeyChar)
         End While
-        Console.ForegroundColor = ConsoleColor.Gray
     End sub
 End Module
