@@ -14,4 +14,7 @@
     <data name="helloworld" xml:space="preserve">
         <value>Üdv Világ!</value>
     </data>
+    <data name="changessaved" xml:space="preserve">
+        <value>Beállítások mentve.</value>
+    </data>
 </root>

@@ -5,6 +5,7 @@ imports newtonsoft.json.linq
 imports kliens.SharedElements
 Module Program
     Sub Main(args As String())
+        Console.Clear()
         firstStartupCheck()
     End Sub
 

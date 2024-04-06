@@ -19,6 +19,10 @@ Friend MustInherit Class SharedElements
         System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
         Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
         Dim result As String = rm.GetString(query)
+        if result = nothing Then
+            System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo("default")
+            result = rm.GetString(query)
+        End If
         return result
     End function
 End Class

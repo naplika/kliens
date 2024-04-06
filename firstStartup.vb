@@ -3,7 +3,6 @@ Imports System.Text.Json.Nodes
 imports kliens.SharedElements
 Public Module FirstStartup
     friend sub Welcome()
-        Console.Clear()
         Console.WriteLine("Welcome to Naplika!")
         Console.WriteLine("Please select a language:")
         Console.WriteLine("1. Hungarian")
@@ -16,13 +15,16 @@ Public Module FirstStartup
             jsonobj.Add("language", "hu")
             dim jsonstring as string = jsonobj.ToString()
             File.WriteAllText(Settingspath, jsonstring)
+            Console.WriteLine(GetTranslation("pleaserestart", "hu"))
         elseif selected = "2" Then
             jsonobj.Add("language", "en")
             dim jsonstring as string = jsonobj.ToString()
             File.WriteAllText(Settingspath, jsonstring)
+            Console.WriteLine(GetTranslation("pleaserestart", "en"))
         Else
             Console.Clear()
             Console.WriteLine("Invalid input. Please only input the number.")
+            Console.WriteLine()
             Welcome()
         End If
     End sub

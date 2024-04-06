@@ -4,7 +4,7 @@
         <OutputType>Exe</OutputType>
         <RootNamespace>kliens</RootNamespace>
         <TargetFramework>net8.0</TargetFramework>
-        <AssemblyName>NaplikaKliens</AssemblyName>
+        <AssemblyName>naplika</AssemblyName>
         <PackageId>Kliens</PackageId>
         <Authors>Naplika</Authors>
         <RepositoryUrl>https://github.com/naplika/kliens</RepositoryUrl>
@@ -28,6 +28,7 @@
       <None Remove="kliens.vbproj.DotSettings" />
       <None Remove="N.png" />
       <None Remove="N.ico" />
+      <None Remove="crowdin.yml" />
     </ItemGroup>
 
     <ItemGroup>
