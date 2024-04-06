@@ -4,6 +4,28 @@
         <OutputType>Exe</OutputType>
         <RootNamespace>kliens</RootNamespace>
         <TargetFramework>net8.0</TargetFramework>
+        <AssemblyName>NaplikaKliens</AssemblyName>
+        <PackageId>Kliens</PackageId>
+        <Authors>Naplika</Authors>
+        <RepositoryUrl>https://github.com/naplika/kliens</RepositoryUrl>
+        <Company>Naplika</Company>
+        <Product>Kliens</Product>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>naplika.snk</AssemblyOriginatorKeyFile>
+        <PublicSign>true</PublicSign>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="README.md" />
+      <None Remove="LICENSE" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="i18n\" />
+    </ItemGroup>
 
 </Project>
