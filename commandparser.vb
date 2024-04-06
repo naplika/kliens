@@ -12,7 +12,7 @@ Public MustInherit Class Commandparser
                     Console.Clear()
                 case Else
                     Console.ForegroundColor = ConsoleColor.Red
-                    Console.WriteLine("Command not found")
+                    Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))
             End Select
         End If
     End sub

@@ -27,4 +27,7 @@
     <data name="welcome" xml:space="preserve">
         <value>Welcome to Naplika!</value>
     </data>
+    <data name="cmdnotfound" xml:space="preserve">
+        <value>Command not found. (Try help)</value>
+    </data>
 </root>

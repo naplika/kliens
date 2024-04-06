@@ -4,7 +4,7 @@ Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 Module Program
-    dim ReadOnly Lang as string = GetSettings("language")
+    Public ReadOnly Lang as string = GetSettings("language")
     Sub Main(args As String())
         Console.TreatControlCAsInput = true
         Console.Clear()
