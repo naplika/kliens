@@ -5,7 +5,7 @@ imports System.resources
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
 
-    Private shared Function GetStartupPath() As String
+    Public shared Function GetStartupPath() As String
         dim path as string = IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
         if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             path = path + "\"

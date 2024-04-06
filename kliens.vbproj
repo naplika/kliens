@@ -40,6 +40,9 @@
       <EmbeddedResource Update="i18n.hu.resx">
         <DependentUpon>i18n.resx</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Update="i18n.en.resx">
+        <DependentUpon>i18n.resx</DependentUpon>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
