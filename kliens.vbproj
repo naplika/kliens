@@ -34,12 +34,12 @@
     <ItemGroup>
       <EmbeddedResource Update="i18n.resx">
         <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>i18n.Designer.cs</LastGenOutput>
+        <LastGenOutput>i18n.Designer.vb</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="i18n.Designer.cs">
+      <Compile Include="i18n.Designer.vb">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>i18n.resx</DependentUpon>
