@@ -39,11 +39,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="i18n.Designer.vb">
+      <None Include="i18n.Designer.vb">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>i18n.resx</DependentUpon>
-      </Compile>
+      </None>
     </ItemGroup>
 
 </Project>
