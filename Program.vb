@@ -4,10 +4,12 @@ Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
+
 Module Program
     Public ReadOnly Lang as string = GetSettings("language")
-    public Debugflag as Boolean = false 
+    public Debugflag as Boolean = false
     public Uniquepass as string
+
     Sub Main(args As String())
         if args.Length > 0 Then
             for each arg as string in args
@@ -68,8 +70,8 @@ Module Program
                     Console.Write(vbBack)
                     Console.Write(" ")
                     Console.Write(vbBack)
-                    Else 
-                        Console.Beep()
+                Else
+                    Console.Beep()
                 End If
                 Continue While
             End If

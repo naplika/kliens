@@ -3,6 +3,7 @@ imports System.Runtime.InteropServices
 imports System.resources
 imports Microsoft.Win32
 imports System.Diagnostics
+
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
 
@@ -27,6 +28,7 @@ Friend MustInherit Class SharedElements
         End If
         return result
     End function
+
     Public shared Function RunBashCommand(command As String) As String
         Dim processStartInfo As New ProcessStartInfo() With {
                 .FileName = "/bin/bash",
@@ -46,6 +48,7 @@ Friend MustInherit Class SharedElements
 
         Return output.Trim()
     End Function
+
     public shared function RunCommand(command as String) as String
         Dim processStartInfo As New ProcessStartInfo() With {
                 .FileName = "cmd.exe",
@@ -65,6 +68,7 @@ Friend MustInherit Class SharedElements
 
         Return output.Trim()
     End function
+
     Public shared Function GetWindowsMachineId() As String
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             Using key = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Cryptography")

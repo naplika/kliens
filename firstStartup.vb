@@ -1,6 +1,7 @@
 ﻿imports System.io
 Imports System.Text.Json.Nodes
 imports kliens.SharedElements
+
 Public Module FirstStartup
     friend sub Welcome()
         Console.WriteLine("Welcome to Naplika!")
