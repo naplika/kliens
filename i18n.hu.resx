@@ -130,7 +130,7 @@
     <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
   </data>
   <data name="filecached">
-    <value>Már volt egy cachelt verzió, ami %s órája lett frissítve.</value>
+    <value>There was already a cached version that was updated %s of minutes ago.</value>
   </data>
   <data name="searchhit">
     <value>%s. Találat</value>
@@ -140,5 +140,14 @@
   </data>
   <data name="bespecific">
     <value>Ha lehet, legyél egy kicsit specifikusabb a névvel.</value>
+  </data>
+  <data name="unencryptedconfig">
+    <value>You are using the old unencrypted config, encrypting now...</value>
+  </data>
+  <data name="settingloadfailed">
+    <value>failed to retrieve %s from config</value>
+  </data>
+  <data name="schoolgetfailed">
+    <value>Couldn't download the school list from reFilc... %s</value>
   </data>
 </root>
