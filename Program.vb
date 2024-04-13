@@ -60,7 +60,7 @@ Module Program
         end try
     End function
 
-    private sub Commandmode()
+    private sub Commandmode(optional byval lastcommand as string = Nothing)
         dim username as string = GetSettings("user")
         dim school as string = GetSettings("school")
         Console.ForegroundColor = consolecolor.Gray
@@ -71,10 +71,16 @@ Module Program
             Dim keyInfo As ConsoleKeyInfo = Console.ReadKey(True)
             If keyInfo.Key = ConsoleKey.Enter Then
                 console.WriteLine()
+                Console.ForegroundColor = ConsoleColor.Gray
                 dim commandarray as string() = command.ToString().Split(" ")
-                Commandparser.Parsecommand(commandarray)
+                Commandparser.Parsecommand(commandarray).Wait()
                 command.Clear()
-                Commandmode()
+                dim last as string
+                for i as Integer = 0 to commandarray.Length -1
+                    last += commandarray(i) + " "
+                Next
+                last = last.TrimEnd(" ")
+                Commandmode(last)
             elseIf keyInfo.Key = ConsoleKey.C AndAlso keyInfo.Modifiers = ConsoleModifiers.Control Then
                 Console.ForegroundColor = ConsoleColor.Gray
                 Console.WriteLine()
@@ -89,6 +95,21 @@ Module Program
                     Console.Beep()
                 End If
                 Continue While
+                elseif keyInfo.key = consolekey.UpArrow Then
+                    if lastcommand = Nothing Then
+                        Console.Beep()
+                        Else
+                            dim length as Integer = command.Length
+                            for i as Integer = 0 to Length -1
+                                Console.Write(vbBack)
+                                Console.Write(" ")
+                                Console.Write(vbBack)
+                                next
+                            command.Clear()
+                            Console.Write(lastcommand)
+                            command.Append(lastcommand)
+                    End If
+                    Continue While
             End If
             command.Append(keyInfo.KeyChar)
             Console.Write(keyInfo.KeyChar)

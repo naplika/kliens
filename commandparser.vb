@@ -1,28 +1,29 @@
 ﻿imports kliens.DataResolver
 
 Public MustInherit Class Commandparser
-    public shared sub Parsecommand(args as String())
-        if args.Length > 0 Then
-            select case args(0)
-                case "exit"
+    public shared Function Parsecommand(args as String()) as Task
+        dim task as task = task.run(Sub()
+            if args.Length > 0 Then
+                if args(0) = "exit" Then
                     cmd_exit()
-                case "clear"
+                elseif args(0) = "clear" or args(0) = "cls" Then
                     Console.Clear()
-                case "cls"
-                    Console.Clear()
-                case "schools"
-                    if args.Length < 2 Then
+                elseif args(0) = "schools" Then
+                    if args.Length <2 Then
                         Console.ForegroundColor = ConsoleColor.Red
-Console.WriteLine("no")
-                     Exit Sub   
+                        Console.WriteLine("no")
+                        Exit Sub
+                    
                     End If
                     searchschool(args(1)).Wait()
-                case Else
+                Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))
-            End Select
-        End If
-    End sub
+                End If
+            End If
+            End Sub)
+return task
+    End Function
 
     private Shared function cmd_exit()
         Console.ForegroundColor = ConsoleColor.Gray

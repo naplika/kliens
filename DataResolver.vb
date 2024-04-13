@@ -22,9 +22,10 @@ Public Class DataResolver
             for each school as JObject in schools
                 dim instituteCode as string = school("instituteCode").Tostring()
                 dim name as string = school("name").ToString()
-                if fuzzySearch(query, instituteCode) > 80 or Fuzzysearch(query, name) > 80 Then
+                if fuzzySearch(query, instituteCode) > 90 or Fuzzysearch(query, name) > 90 Then
                     hitnum += 1
-                   hits += vbcrlf + GetTranslation("searchhit", lang).Replace("%s", hitnum.ToString()) + vbcrlf + name + vbcrlf + instituteCode + " (" + school("city").ToString() + ")" 
+                    hits += vbcrlf + GetTranslation("searchhit", lang).Replace("%s", hitnum.ToString()) + vbcrlf + name +
+                            vbcrlf + instituteCode + " (" + school("city").ToString() + ")"
                 End If
             Next
             Console.WriteLine(hits)
