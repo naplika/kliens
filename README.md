@@ -4,3 +4,11 @@
 
 ![Crowdin](https://badges.crowdin.net/naplika/localized.svg)
 [Segíts fordítani!](https://crowdin.com/project/naplika)
+
+<hr>
+
+## Adataid védelme fontos!
+
+A [*legújabb*](https://github.com/Delta-Trolling-Technologies/FuckMyBytes) technológiával védjük az adataidat!<br>
+Ez a csodálat teljes mértékben biztonságban tartja adataidat egy egyedi azonosító segítségével, aminek a tulajdonosa CSAK TE VAGY!<br>
+Így a legnagyobb biztonságban tarthatod adataidat vírusokkal szemben is!
