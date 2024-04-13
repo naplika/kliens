@@ -126,4 +126,19 @@
   <data name="welcome">
     <value>Welcome to Naplika!</value>
   </data>
+  <data name="cmdnotfound">
+    <value>Command not found. (Try help)</value>
+  </data>
+  <data name="filecached">
+    <value>There was already a cached version that was updated %s of hours ago.</value>
+  </data>
+  <data name="searchhit">
+    <value>Hit %s</value>
+  </data>
+  <data name="morethan1school">
+    <value>The command found more than 1 school (%s).</value>
+  </data>
+  <data name="bespecific">
+    <value>If possible, be a little more specific with the name.</value>
+  </data>
 </root>

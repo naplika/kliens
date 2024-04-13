@@ -126,4 +126,19 @@
   <data name="welcome">
     <value>Üdv a Naplikában!</value>
   </data>
+  <data name="cmdnotfound">
+    <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
+  </data>
+  <data name="filecached">
+    <value>Már volt egy cachelt verzió, ami %s órája lett frissítve.</value>
+  </data>
+  <data name="searchhit">
+    <value>%s. Találat</value>
+  </data>
+  <data name="morethan1school">
+    <value>A parancs 1-nél több iskolát talált (%s).</value>
+  </data>
+  <data name="bespecific">
+    <value>Ha lehet, legyél egy kicsit specifikusabb a névvel.</value>
+  </data>
 </root>
