@@ -22,14 +22,16 @@ Public Module SecurityMeasurements
         End If
         dim mix as string = machineId+diskUuid+userId+cpuId
         mix = EncryptionProviders.S512X100(mix)
-        Console.WriteLine("==DEBUG UNIQUECRAP==")
-        Console.Writeline("hwid " + machineId)
-        Console.WriteLine("did " + diskUuid)
-        Console.WriteLine("usr " + userId)
-        Console.WriteLine("cid " + cpuId)
-        Console.WriteLine("uniqueid " + mix)
-        Console.WriteLine("==END DEBUG==")
-        return true
+        if Program.Debugflag = true Then
+            Console.WriteLine("==DEBUG UNIQUECRAP==")
+            Console.Writeline("hwid " + machineId)
+            Console.WriteLine("did " + diskUuid)
+            Console.WriteLine("usr " + userId)
+            Console.WriteLine("cid " + cpuId)
+            Console.WriteLine("uniqueid " + mix)
+            Console.WriteLine("==END DEBUG==")
+        End If
+        return mix
     End Function
 End Module
 End Namespace
