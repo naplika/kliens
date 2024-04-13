@@ -4,37 +4,44 @@ Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
+Imports System.Threading
 
 Module Program
-    public READONLY Uniquepass as string = SecurityMeasurements.GenUniquePass()
-    public ReadOnly decryptconf as string = SecurityMeasurements.decryptconfig()
-    Public ReadOnly Lang as string = GetSettings("language")
+    public Uniquepass as string = SecurityMeasurements.GenUniquePass()
+    public lang as String
+    public decryptconf as string
+    
     Sub Main(args As String())
+        decryptconf = SecurityMeasurements.decryptconfig()
+        FirstStartupCheck().Wait()
+        lang = GetSettings("language")
         Console.TreatControlCAsInput = true
         Console.Clear()
-        firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
         Commandmode()
     End Sub
 
-    Private function FirstStartupCheck()
-        if File.Exists(Settingspath) Then
-            dim jsonString as string
-            if decryptconf = "fail" Then
-                Console.WriteLine(GetTranslation("unencryptedconfig", lang))
-                upgradeconfig()
-                Environment.Exit(0)
+    Private function FirstStartupCheck() as task
+        dim task as task = task.Run(Sub()
+            if File.Exists(Settingspath) Then
+                dim jsonString as string
+                if decryptconf = "fail" or decryptconf = nothing Then
+                    Console.WriteLine(GetTranslation("unencryptedconfig", lang))
+                    upgradeconfig()
+                    Environment.Exit(0)
+                Else
+                    jsonString = decryptconf
+                End If
+                dim jsonObject as JObject = JObject.Parse(jsonString)
+                if not jsonObject.ContainsKey("firstStartup") Then
+                    firstStartup.welcome().Wait()
+                End If
             Else
-                jsonString = decryptconf
+                firstStartup.welcome().Wait()
+
             End If
-            dim jsonObject as JObject = JObject.Parse(jsonString)
-            if not jsonObject.ContainsKey("firstStartup") Then
-                firstStartup.welcome()
-            End If
-        Else
-            firstStartup.welcome()
-        End If
-        return True
+        end sub)
+        return task
     End function
 
     private function GetSettings(q as string) as String

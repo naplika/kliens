@@ -72,7 +72,12 @@ Namespace FuckMyBytes
             if step6 = "fail" Then
                 return "fail"
             End If
-            dim step7 as string = step6.Remove(0, "I'm nothing like yall".Length)
+            dim step7 as String
+            try
+                step7 = step6.Remove(0, "I'm nothing like yall".Length)
+            catch
+                return "fail"
+            end try 
             step6 = Nothing
             dim step8 as Byte() = Convert.FromBase64String(step7)
             step7 = Nothing

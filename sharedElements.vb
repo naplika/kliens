@@ -19,7 +19,12 @@ Friend MustInherit Class SharedElements
 
     public shared function GetTranslation(query as string, lang as string) as String
         Dim originalCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture
-        System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
+        if lang isnot Nothing Then
+            System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
+        Else
+            System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
+        End If
+        
         Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
         Dim result As String = rm.GetString(query)
         if result.Length <= 0 Then
@@ -82,4 +87,27 @@ Friend MustInherit Class SharedElements
             Throw New PlatformNotSupportedException("This function is only supported on Windows.")
         End If
     End Function
+
+    public shared Function checkCacheTime(path as String, minutes as Integer) As Boolean
+        if Not System.IO.File.Exists(path) Then
+            Return False
+        End If
+        Dim lastWriteTime As DateTime = System.IO.File.GetLastWriteTime(path)
+        Dim currentTime As DateTime = DateTime.Now
+        Dim diff As TimeSpan = currentTime - lastWriteTime
+        if diff.TotalMinutes > minutes andalso not diff.TotalMinutes < 0 then
+            Return False
+        End If
+        Return True
+    End Function
+
+    public shared function getCacheTime(path as string) as Integer
+        if Not System.IO.File.Exists(path) Then
+            Return - 1
+        End If
+        Dim lastWriteTime As DateTime = System.IO.File.GetLastWriteTime(path)
+        Dim currentTime As DateTime = DateTime.Now
+        Dim diff As TimeSpan = currentTime - lastWriteTime
+        Return diff.TotalMinutes
+    End function
 End Class

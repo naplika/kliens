@@ -1,4 +1,4 @@
-﻿
+﻿imports kliens.Kretamechanics
 
 Public MustInherit Class Commandparser
     public shared sub Parsecommand(args as String())
@@ -10,6 +10,8 @@ Public MustInherit Class Commandparser
                     Console.Clear()
                 case "cls"
                     Console.Clear()
+                case "schools"
+                    searchschool(args(1))
                 case Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))

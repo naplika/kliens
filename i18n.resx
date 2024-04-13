@@ -48,4 +48,7 @@
     <data name="settingloadfailed" xml:space="preserve">
         <value>failed to retrieve %s from config</value>
     </data>
+    <data name="schoolgetfailed" xml:space="preserve">
+        <value>Couldn't download the school list from reFilc... %s</value>
+    </data>
 </root>
