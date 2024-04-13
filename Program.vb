@@ -76,5 +76,6 @@ Module Program
             command.Append(keyInfo.KeyChar)
             Console.Write(keyInfo.KeyChar)
         End While
+' ReSharper disable once FunctionNeverReturns
     End sub
 End Module
