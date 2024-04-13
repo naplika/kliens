@@ -1,3 +1,4 @@
+Imports System.IO
 imports System.Runtime.InteropServices
 imports kliens.SharedElements
 imports System.Text
@@ -79,5 +80,16 @@ Namespace FuckMyBytes
             step8 = Nothing
             return step9
         End function
+
+        public Function decryptconfig() As String
+            if File.Exists(Settingspath) Then
+                dim str as string = io.File.ReadAllText(Settingspath)
+                str = UnFuckString(str)
+                str = str.Replace(vbcrlf, "").Replace(vbLf, "").Replace(vbCr, "").Replace("  ", "")
+                return str
+            Else
+                return "fail"
+            End If
+        End Function
     End Module
 End Namespace

@@ -7,8 +7,8 @@ imports kliens.FuckMyBytes
 
 Module Program
     public READONLY Uniquepass as string = SecurityMeasurements.GenUniquePass()
+    public ReadOnly decryptconf as string = SecurityMeasurements.decryptconfig()
     Public ReadOnly Lang as string = GetSettings("language")
-    
     Sub Main(args As String())
         Console.TreatControlCAsInput = true
         Console.Clear()
@@ -19,7 +19,7 @@ Module Program
 
     Private function FirstStartupCheck()
         if File.Exists(Settingspath) Then
-            dim jsonString as string = file.ReadAllText(Settingspath)
+            dim jsonString as string = decryptconf
             dim jsonObject as JObject = JObject.Parse(jsonString)
             if not jsonObject.ContainsKey("firstStartup") Then
                 firstStartup.welcome()
@@ -31,19 +31,12 @@ Module Program
     End function
 
     private function GetSettings(q as string) as String
-        dim encrypted as string = file.ReadAllText(Settingspath)
-        dim decrypted as string
-        try
-            decrypted = SecurityMeasurements.UnFuckString(encrypted)
-        catch ex as Exception
-            console.WriteLine(ex.Message)
-        End Try
         dim jsonstring as string
-        if decrypted = "fail" Then
+        if decryptconf = "fail" Then
             jsonstring = file.ReadAllText(Settingspath)
         Else
-            jsonstring = decrypted
-        end if
+            jsonstring = decryptconf
+        End If
         try
         dim jsonobject as jobject = JObject.Parse(jsonstring)
         return jsonobject(q).ToString()
