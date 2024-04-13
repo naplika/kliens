@@ -130,7 +130,7 @@
     <value>Command not found. (Try help)</value>
   </data>
   <data name="filecached">
-    <value>There was already a cached version that was updated %s of hours ago.</value>
+    <value>There was already a cached version that was updated %s of minutes ago.</value>
   </data>
   <data name="searchhit">
     <value>Hit %s</value>
@@ -140,5 +140,14 @@
   </data>
   <data name="bespecific">
     <value>If possible, be a little more specific with the name.</value>
+  </data>
+  <data name="unencryptedconfig">
+    <value>You are using the old unencrypted config, encrypting now...</value>
+  </data>
+  <data name="settingloadfailed">
+    <value>failed to retrieve %s from config</value>
+  </data>
+  <data name="schoolgetfailed">
+    <value>Couldn't download the school list from reFilc... %s</value>
   </data>
 </root>
