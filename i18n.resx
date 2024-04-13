@@ -31,7 +31,7 @@
         <value>Command not found. (Try help)</value>
     </data>
     <data name="filecached" xml:space="preserve">
-        <value>There was already a cached version that was updated %s of hours ago.</value>
+        <value>There was already a cached version that was updated %s of minutes ago.</value>
     </data>
     <data name="searchhit" xml:space="preserve">
         <value>Hit %s</value>

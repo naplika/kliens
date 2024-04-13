@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="helloworld">
-    <value>Üdv Világ!</value>
+    <value>Hello világ!</value>
   </data>
   <data name="changessaved">
     <value>Beállítások mentve.</value>
@@ -130,7 +130,7 @@
     <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
   </data>
   <data name="filecached">
-    <value>Már volt egy cachelt verzió, ami %s órája lett frissítve.</value>
+    <value>Már volt egy cachelt verzió, ami %s perce lett frissítve.</value>
   </data>
   <data name="searchhit">
     <value>%s. Találat</value>

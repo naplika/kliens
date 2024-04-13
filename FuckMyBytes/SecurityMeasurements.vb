@@ -6,6 +6,7 @@ imports System.Text
 Namespace FuckMyBytes
     Public Module SecurityMeasurements
         Dim ReadOnly _utf8 As Encoding = Encoding.UTF8
+
         public Function GenUniquePass() as string
             dim machineId as string = ""
             dim diskUuid as String = ""
@@ -77,7 +78,7 @@ Namespace FuckMyBytes
                 step7 = step6.Remove(0, "I'm nothing like yall".Length)
             catch
                 return "fail"
-            end try 
+            end try
             step6 = Nothing
             dim step8 as Byte() = Convert.FromBase64String(step7)
             step7 = Nothing

@@ -7,6 +7,7 @@ Imports Org.BouncyCastle.Crypto
 Imports Org.BouncyCastle.Crypto.Parameters
 Imports Org.BouncyCastle.Security
 Imports System.IO.Compression
+
 Namespace FuckMyBytes
     Public Module EncryptionProviders
         private function Sha512(str as string) as String

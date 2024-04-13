@@ -3,6 +3,9 @@ imports System.Runtime.InteropServices
 imports System.resources
 imports Microsoft.Win32
 imports System.Diagnostics
+imports FuzzySharp
+imports FuzzySharp.Fuzz
+imports FuzzySharp.PreProcess
 
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
@@ -24,7 +27,7 @@ Friend MustInherit Class SharedElements
         Else
             System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
         End If
-        
+
         Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
         Dim result As String = rm.GetString(query)
         if result.Length <= 0 Then
@@ -43,9 +46,7 @@ Friend MustInherit Class SharedElements
                 .CreateNoWindow = True
                 }
 
-        Dim process As New Process() With {
-                .StartInfo = processStartInfo
-                }
+        Dim process As New Diagnostics.Process() With {.StartInfo = processStartInfo}
         process.Start()
 
         Dim output As String = process.StandardOutput.ReadToEnd()
@@ -63,9 +64,7 @@ Friend MustInherit Class SharedElements
                 .CreateNoWindow = True
                 }
 
-        Dim process As New Process() With {
-                .StartInfo = processStartInfo
-                }
+        Dim process As New System.Diagnostics.Process() With {.StartInfo = processStartInfo}
         process.Start()
 
         Dim output As String = process.StandardOutput.ReadToEnd()
@@ -109,5 +108,10 @@ Friend MustInherit Class SharedElements
         Dim currentTime As DateTime = DateTime.Now
         Dim diff As TimeSpan = currentTime - lastWriteTime
         Return diff.TotalMinutes
+    End function
+
+    public shared function fuzzySearch(q as string, data as string) as Integer
+        dim ratio = FuzzySharp.Fuzz.PartialRatio(q, data)
+        return ratio
     End function
 End Class

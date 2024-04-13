@@ -34,7 +34,6 @@ Public Module FirstStartup
             End If
             if okinput = true Then
                 dim jsonstring as string = jsonobj.ToString()
-                Console.WriteLine(jsonstring)
                 dim output as STRING = FuckMyBytes.FuckString(jsonstring)
                 File.WriteAllText(Settingspath, output)
                 Console.WriteLine(GetTranslation("changessaved", templang))

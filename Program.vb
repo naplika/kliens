@@ -10,7 +10,7 @@ Module Program
     public Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public lang as String
     public decryptconf as string
-    
+
     Sub Main(args As String())
         decryptconf = SecurityMeasurements.decryptconfig()
         FirstStartupCheck().Wait()
@@ -52,8 +52,8 @@ Module Program
             jsonstring = decryptconf
         End If
         try
-        dim jsonobject as jobject = JObject.Parse(jsonstring)
-        return jsonobject(q).ToString()
+            dim jsonobject as jobject = JObject.Parse(jsonstring)
+            return jsonobject(q).ToString()
         catch ex as Exception
             Console.WriteLine(GetTranslation("settingloadfailed", lang).Replace("%s", q))
             return false
