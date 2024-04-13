@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
+imports kliens.FuckMyBytes
 Module Program
     Public ReadOnly Lang as string = GetSettings("language")
     Sub Main(args As String())
@@ -10,6 +11,7 @@ Module Program
         Console.Clear()
         firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
+        SecurityMeasurements.GenUniquePass()
         Commandmode()
     End Sub
 
