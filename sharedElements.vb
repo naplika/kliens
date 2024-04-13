@@ -66,12 +66,16 @@ Friend MustInherit Class SharedElements
         Return output.Trim()
     End function
     Public shared Function GetWindowsMachineId() As String
-        Using key = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Cryptography")
-            If key IsNot Nothing Then
-                Return key.GetValue("MachineGuid").ToString()
-            Else
-                Throw New Exception("none")
-            End If
-        End Using
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            Using key = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Cryptography")
+                If key IsNot Nothing Then
+                    Return key.GetValue("MachineGuid").ToString()
+                Else
+                    Throw New Exception("none")
+                End If
+            End Using
+        Else
+            Throw New PlatformNotSupportedException("This function is only supported on Windows.")
+        End If
     End Function
 End Class
