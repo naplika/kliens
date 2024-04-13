@@ -7,16 +7,18 @@ imports kliens.FuckMyBytes
 Module Program
     Public ReadOnly Lang as string = GetSettings("language")
     public Debugflag as Boolean = false 
-    public uniquepass as string
+    public Uniquepass as string
     Sub Main(args As String())
-        for each arg as string in args
-            if arg.ToLower().Equals("-debug") Then
-                Debugflag = true
-            End If
-        Next
+        if args.Length > 0 Then
+            for each arg as string in args
+                if arg.ToLower().Equals("-debug") Then
+                    Debugflag = true
+                End If
+            Next
+        End If
         Console.TreatControlCAsInput = true
         Console.Clear()
-        uniquepass = SecurityMeasurements.GenUniquePass()
+        Uniquepass = SecurityMeasurements.GenUniquePass()
         firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
         Commandmode()
