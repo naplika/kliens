@@ -42,4 +42,10 @@
     <data name="bespecific" xml:space="preserve">
         <value>If possible, be a little more specific with the name.</value>
     </data>
+    <data name="unencryptedconfig" xml:space="preserve">
+        <value>You are using the old unencrypted config, encrypting now...</value>
+    </data>
+    <data name="settingloadfailed" xml:space="preserve">
+        <value>failed to retrieve %s from config</value>
+    </data>
 </root>

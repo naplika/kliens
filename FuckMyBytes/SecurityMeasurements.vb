@@ -91,5 +91,13 @@ Namespace FuckMyBytes
                 return "fail"
             End If
         End Function
+
+        public function upgradeconfig()
+            dim config as string = io.File.ReadAllText(Settingspath)
+            dim output as string = FuckString(config)
+            IO.File.WriteAllText(Settingspath, output)
+
+            return true
+        End function
     End Module
 End Namespace

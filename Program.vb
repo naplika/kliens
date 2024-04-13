@@ -19,7 +19,14 @@ Module Program
 
     Private function FirstStartupCheck()
         if File.Exists(Settingspath) Then
-            dim jsonString as string = decryptconf
+            dim jsonString as string
+            if decryptconf = "fail" Then
+                Console.WriteLine(GetTranslation("unencryptedconfig", lang))
+                upgradeconfig()
+                Environment.Exit(0)
+            Else
+                jsonString = decryptconf
+            End If
             dim jsonObject as JObject = JObject.Parse(jsonString)
             if not jsonObject.ContainsKey("firstStartup") Then
                 firstStartup.welcome()
@@ -33,7 +40,7 @@ Module Program
     private function GetSettings(q as string) as String
         dim jsonstring as string
         if decryptconf = "fail" Then
-            jsonstring = file.ReadAllText(Settingspath)
+            jsonstring = File.ReadAllText(Settingspath)
         Else
             jsonstring = decryptconf
         End If
@@ -41,7 +48,7 @@ Module Program
         dim jsonobject as jobject = JObject.Parse(jsonstring)
         return jsonobject(q).ToString()
         catch ex as Exception
-            Console.WriteLine("failed to retrieve {0} from config", q)
+            Console.WriteLine(GetTranslation("settingloadfailed", lang).Replace("%s", q))
             return false
         end try
     End function
