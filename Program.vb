@@ -6,21 +6,12 @@ imports kliens.SharedElements
 imports kliens.FuckMyBytes
 
 Module Program
+    public READONLY Uniquepass as string = SecurityMeasurements.GenUniquePass()
     Public ReadOnly Lang as string = GetSettings("language")
-    public Debugflag as Boolean = false
-    public Uniquepass as string
-
+    
     Sub Main(args As String())
-        if args.Length > 0 Then
-            for each arg as string in args
-                if arg.ToLower().Equals("-debug") Then
-                    Debugflag = true
-                End If
-            Next
-        End If
         Console.TreatControlCAsInput = true
         Console.Clear()
-        Uniquepass = SecurityMeasurements.GenUniquePass()
         firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
         Commandmode()
@@ -40,9 +31,26 @@ Module Program
     End function
 
     private function GetSettings(q as string) as String
-        dim jsonstring as string = file.ReadAllText(Settingspath)
+        dim encrypted as string = file.ReadAllText(Settingspath)
+        dim decrypted as string
+        try
+            decrypted = SecurityMeasurements.UnFuckString(encrypted)
+        catch ex as Exception
+            console.WriteLine(ex.Message)
+        End Try
+        dim jsonstring as string
+        if decrypted = "fail" Then
+            jsonstring = file.ReadAllText(Settingspath)
+        Else
+            jsonstring = decrypted
+        end if
+        try
         dim jsonobject as jobject = JObject.Parse(jsonstring)
         return jsonobject(q).ToString()
+        catch ex as Exception
+            Console.WriteLine("failed to retrieve {0} from config", q)
+            return false
+        end try
     End function
 
     private sub Commandmode()

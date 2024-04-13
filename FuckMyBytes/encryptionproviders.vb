@@ -224,7 +224,12 @@ Namespace FuckMyBytes
             tripleDesAlg.Key = key
             tripleDesAlg.IV = iv
             Dim decryptor As ICryptoTransform = tripleDesAlg.CreateDecryptor()
-            Dim encryptedBytes As Byte() = Convert.FromBase64String(encryptedData)
+            Dim encryptedBytes As Byte()
+            try
+                encryptedBytes = Convert.FromBase64String(encryptedData)
+            Catch
+                return "fail"
+            end try
             Dim decryptedBytes As Byte()
             Try
                 decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length)

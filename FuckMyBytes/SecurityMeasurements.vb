@@ -25,17 +25,6 @@ Namespace FuckMyBytes
             End If
             dim mix as string = machineId + diskUuid + userId + cpuId
             mix = EncryptionProviders.S512X100(mix)
-            if Program.Debugflag = true Then
-' ReSharper disable once LocalizableElement
-                Console.WriteLine("==DEBUG UNIQUECRAP==")
-                Console.Writeline("hwid " + machineId)
-                Console.WriteLine("did " + diskUuid)
-                Console.WriteLine("usr " + userId)
-                Console.WriteLine("cid " + cpuId)
-                Console.WriteLine("uniqueid " + mix)
-' ReSharper disable once LocalizableElement
-                Console.WriteLine("==END DEBUG==")
-            End If
             return mix
         End Function
 
@@ -59,7 +48,7 @@ Namespace FuckMyBytes
         End Function
 
         public function UnFuckString(str as string) as String
-            dim step1 as string = TripleDesDecrypt(str, program.Uniquepass)
+            dim step1 as string = TripleDesDecrypt(str, Program.Uniquepass)
             if step1 = "fail" Then
                 return "fail"
             End If
