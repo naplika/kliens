@@ -17,6 +17,18 @@
         <NoWarn>BC41997</NoWarn>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugType>full</DebugType>
+      <DocumentationFile>bin\Debug\net8.0\kliens.xml</DocumentationFile>
+      <Prefer32bit>false</Prefer32bit>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+      <Prefer32bit>false</Prefer32bit>
+      <DebugType>none</DebugType>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
       <PackageReference Include="FuzzySharp" Version="2.0.2" />
