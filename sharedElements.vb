@@ -3,9 +3,9 @@ imports System.Runtime.InteropServices
 imports System.resources
 imports Microsoft.Win32
 imports System.Diagnostics
-imports FuzzySharp
-imports FuzzySharp.Fuzz
-imports FuzzySharp.PreProcess
+Imports System.Net.Http
+
+#Disable Warning BC42016
 
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
@@ -87,7 +87,7 @@ Friend MustInherit Class SharedElements
         End If
     End Function
 
-    public shared Function checkCacheTime(path as String, minutes as Integer) As Boolean
+    public shared Function CheckCacheTime(path as String, minutes as Integer) As Boolean
         if Not System.IO.File.Exists(path) Then
             Return False
         End If
@@ -100,7 +100,7 @@ Friend MustInherit Class SharedElements
         Return True
     End Function
 
-    public shared function getCacheTime(path as string) as Integer
+    public shared function GetCacheTime(path as string) as Integer
         if Not System.IO.File.Exists(path) Then
             Return - 1
         End If
@@ -110,8 +110,24 @@ Friend MustInherit Class SharedElements
         Return diff.TotalMinutes
     End function
 
-    public shared function fuzzySearch(q as string, data as string) as Integer
+    public shared function FuzzySearch(q as string, data as string) as Integer
         dim ratio = FuzzySharp.Fuzz.PartialRatio(q, data)
         return ratio
     End function
+
+    Public shared Function CheckInternetConnection() As Boolean
+        Try
+            Using client = New HttpClient()
+                Using stream = client.GetAsync("http://www.google.com").Result
+                    if stream.IsSuccessStatusCode Then
+                        Return True
+                    Else
+                        return False
+                    End If
+                End Using
+            End Using
+        Catch
+            Return False
+        End Try
+    End Function
 End Class

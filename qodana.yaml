@@ -27,3 +27,14 @@ profile:
 #Install IDE plugins before Qodana execution (Applied in CI/CD pipeline)
 #plugins:
 #  - id: <plugin.id> #(plugin id can be found at https://plugins.jetbrains.com)
+exclude:
+  - name: OverriddenWithSameValue
+    paths:
+      - i18n.en.resx
+  - name: NotOverriddenInSpecificCulture
+    paths:
+      - i18n.resx
+  - name: LocalizableElement
+  - name: CA1850
+    paths:
+      - FuckMyBytes/encryptionproviders.vb

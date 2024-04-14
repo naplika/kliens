@@ -14,6 +14,7 @@
         <AssemblyOriginatorKeyFile>main.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
         <ApplicationIcon>N.ico</ApplicationIcon>
+        <NoWarn>BC41997</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>

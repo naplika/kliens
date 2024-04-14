@@ -1,5 +1,7 @@
 ﻿imports kliens.DataResolver
 
+#Disable Warning BC42021
+
 Public MustInherit Class Commandparser
     public shared Function Parsecommand(args as String()) as Task
         dim task as task = task.run(Sub()
@@ -9,11 +11,11 @@ Public MustInherit Class Commandparser
                 elseif args(0) = "clear" or args(0) = "cls" Then
                     Console.Clear()
                 elseif args(0) = "schools" Then
-                    if args.Length <2 Then
+                    if args.Length < 2 Then
                         Console.ForegroundColor = ConsoleColor.Red
                         Console.WriteLine("no")
                         Exit Sub
-                    
+
                     End If
                     searchschool(args(1)).Wait()
                 Else
@@ -21,8 +23,8 @@ Public MustInherit Class Commandparser
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))
                 End If
             End If
-            End Sub)
-return task
+        End Sub)
+        return task
     End Function
 
     private Shared function cmd_exit()

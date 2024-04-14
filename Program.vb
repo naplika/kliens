@@ -4,15 +4,16 @@ Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
-Imports System.Threading
+
+#Disable Warning BC42016
 
 Module Program
-    public Uniquepass as string = SecurityMeasurements.GenUniquePass()
-    public lang as String
-    public decryptconf as string
+    public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
+    public Lang as String
+    private _decryptConf as string
 
-    Sub Main(args As String())
-        decryptconf = SecurityMeasurements.decryptconfig()
+    Sub Main()
+        _decryptConf = SecurityMeasurements.decryptconfig()
         FirstStartupCheck().Wait()
         lang = GetSettings("language")
         Console.TreatControlCAsInput = true
@@ -24,13 +25,13 @@ Module Program
     Private function FirstStartupCheck() as task
         dim task as task = task.Run(Sub()
             if File.Exists(Settingspath) Then
-                dim jsonString as string
-                if decryptconf = "fail" or decryptconf = nothing Then
+                dim jsonString = ""
+                if _decryptConf = "fail" or _decryptConf = nothing Then
                     Console.WriteLine(GetTranslation("unencryptedconfig", lang))
                     upgradeconfig()
                     Environment.Exit(0)
                 Else
-                    jsonString = decryptconf
+                    jsonString = _decryptConf
                 End If
                 dim jsonObject as JObject = JObject.Parse(jsonString)
                 if not jsonObject.ContainsKey("firstStartup") Then
@@ -46,17 +47,17 @@ Module Program
 
     private function GetSettings(q as string) as String
         dim jsonstring as string
-        if decryptconf = "fail" Then
+        if _decryptConf = "fail" Then
             jsonstring = File.ReadAllText(Settingspath)
         Else
-            jsonstring = decryptconf
+            jsonstring = _decryptConf
         End If
         try
             dim jsonobject as jobject = JObject.Parse(jsonstring)
             return jsonobject(q).ToString()
         catch ex as Exception
             Console.WriteLine(GetTranslation("settingloadfailed", lang).Replace("%s", q))
-            return false
+            return False
         end try
     End function
 
@@ -75,8 +76,8 @@ Module Program
                 dim commandarray as string() = command.ToString().Split(" ")
                 Commandparser.Parsecommand(commandarray).Wait()
                 command.Clear()
-                dim last as string
-                for i as Integer = 0 to commandarray.Length -1
+                dim last = ""
+                for i = 0 to commandarray.Length - 1
                     last += commandarray(i) + " "
                 Next
                 last = last.TrimEnd(" ")
@@ -95,21 +96,21 @@ Module Program
                     Console.Beep()
                 End If
                 Continue While
-                elseif keyInfo.key = consolekey.UpArrow Then
-                    if lastcommand = Nothing Then
-                        Console.Beep()
-                        Else
-                            dim length as Integer = command.Length
-                            for i as Integer = 0 to Length -1
-                                Console.Write(vbBack)
-                                Console.Write(" ")
-                                Console.Write(vbBack)
-                                next
-                            command.Clear()
-                            Console.Write(lastcommand)
-                            command.Append(lastcommand)
-                    End If
-                    Continue While
+            elseif keyInfo.key = consolekey.UpArrow Then
+                if lastcommand = Nothing Then
+                    Console.Beep()
+                Else
+                    dim length as Integer = command.Length
+                    for i = 0 to Length - 1
+                        Console.Write(vbBack)
+                        Console.Write(" ")
+                        Console.Write(vbBack)
+                    next
+                    command.Clear()
+                    Console.Write(lastcommand)
+                    command.Append(lastcommand)
+                End If
+                Continue While
             End If
             command.Append(keyInfo.KeyChar)
             Console.Write(keyInfo.KeyChar)

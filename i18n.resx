@@ -51,4 +51,7 @@
     <data name="schoolgetfailed" xml:space="preserve">
         <value>Couldn't download the school list from reFilc... %s</value>
     </data>
+    <data name="nointernet" xml:space="preserve">
+        <value>Internet not available, current data may be out of date.</value>
+    </data>
 </root>

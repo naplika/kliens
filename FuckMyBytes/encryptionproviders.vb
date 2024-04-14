@@ -8,11 +8,17 @@ Imports Org.BouncyCastle.Crypto.Parameters
 Imports Org.BouncyCastle.Security
 Imports System.IO.Compression
 
+#Disable Warning BC40000
+#Disable Warning SYSLIB0021
+#Disable Warning SYSLIB0022
+#Disable Warning BC42021
+#Disable Warning BC42016
+
 Namespace FuckMyBytes
     Public Module EncryptionProviders
         private function Sha512(str as string) as String
             Dim digest As New Sha512Digest()
-            Dim resBuf As Byte() = New Byte(digest.GetDigestSize() - 1) {}
+            Dim resBuf = New Byte(digest.GetDigestSize() - 1) {}
             Dim inputBytes As Byte() = System.Text.Encoding.UTF8.GetBytes(str)
 
             digest.BlockUpdate(inputBytes, 0, inputBytes.Length)
@@ -22,7 +28,7 @@ Namespace FuckMyBytes
         End function
 
         public function S512X100(str as string) as String
-            dim i as Integer = 0
+            dim i = 0
             while i < 100
                 str = Sha512(str)
                 i += 1
@@ -30,10 +36,11 @@ Namespace FuckMyBytes
             return str
         End function
 
-        Public Function AES_Encrypt(ByVal input As String, ByVal pass As String) As String
+        Public Function AES_Encrypt(input As String, pass As String) As String
+
             Using aes As New RijndaelManaged
                 Using hashAes As New MD5CryptoServiceProvider
-                    Dim encrypted As String = ""
+                    Dim encrypted As String
                     Try
                         Dim hash(31) As Byte
                         Dim temp As Byte() = hashAes.ComputeHash(Encoding.ASCII.GetBytes(pass))
@@ -52,10 +59,10 @@ Namespace FuckMyBytes
             End Using
         End Function
 
-        Public Function AES_Decrypt(ByVal input As String, ByVal pass As String) As String
+        Public Function AES_Decrypt(input As String, pass As String) As String
             Using aes As New RijndaelManaged
                 Using hashAes As New MD5CryptoServiceProvider
-                    Dim decrypted As String = ""
+                    Dim decrypted As String
                     Try
                         Dim hash(31) As Byte
                         Dim temp As Byte() = hashAes.ComputeHash(Encoding.ASCII.GetBytes(pass))
@@ -103,7 +110,7 @@ Namespace FuckMyBytes
             Dim ivBytes As Byte() = Encoding.UTF8.GetBytes(password)
             Dim output As String
             Try
-                Using desAlg As DESCryptoServiceProvider = New DESCryptoServiceProvider()
+                Using desAlg = New DESCryptoServiceProvider()
                     desAlg.Key = keyBytes
                     desAlg.IV = ivBytes
                     Using encryptor As ICryptoTransform = desAlg.CreateEncryptor(keyBytes, ivBytes)
@@ -126,7 +133,7 @@ Namespace FuckMyBytes
         Public Function DesDecrypt(encryptedText As String, password As String) As String
             Dim keyBytes As Byte() = Encoding.UTF8.GetBytes(password)
             Dim ivBytes As Byte() = Encoding.UTF8.GetBytes(password)
-            Dim encryptedBytes As Byte()
+            Dim encryptedBytes As Byte() = Nothing
             Dim errors As Boolean
             Try
                 encryptedBytes = Convert.FromBase64String(encryptedText)
@@ -135,7 +142,7 @@ Namespace FuckMyBytes
             End Try
             Dim output As String
             If errors = False Then
-                Using desAlg As DESCryptoServiceProvider = New DESCryptoServiceProvider()
+                Using desAlg = New DESCryptoServiceProvider()
                     desAlg.Key = keyBytes
                     desAlg.IV = ivBytes
                     Using decryptor As ICryptoTransform = desAlg.CreateDecryptor(keyBytes, ivBytes)
@@ -189,7 +196,7 @@ Namespace FuckMyBytes
             Dim cipher As IBufferedCipher = CipherUtilities.GetCipher("IDEA/ECB/PKCS7Padding")
             cipher.Init(False, New KeyParameter(key))
             Dim encryptedData As Byte() = Convert.FromBase64String(encryptedText)
-            Dim decryptedData As Byte()
+            Dim decryptedData As Byte() = Nothing
             Try
                 decryptedData = cipher.DoFinal(encryptedData)
             Catch ex As Exception
@@ -199,7 +206,7 @@ Namespace FuckMyBytes
                 Dim decryptedText As String = Encoding.UTF8.GetString(decryptedData)
                 Return decryptedText
             Else
-                Dim decryptedtext As String = "fail"
+                Const decryptedtext = "fail"
                 Return decryptedtext
             End If
         End Function
@@ -207,7 +214,7 @@ Namespace FuckMyBytes
         Public Function TripleDesEncrypt(data As String, password As String) As String
             Dim tripleDesAlg As New TripleDESCryptoServiceProvider()
             Dim key As Byte() = TdesGen(password)
-            Dim iv As Byte() = New Byte() {0, 0, 0, 0, 0, 0, 0, 0}
+            Dim iv = New Byte() {0, 0, 0, 0, 0, 0, 0, 0}
             tripleDesAlg.Key = key
             tripleDesAlg.IV = iv
             Dim encryptor As ICryptoTransform = tripleDesAlg.CreateEncryptor()
@@ -221,7 +228,7 @@ Namespace FuckMyBytes
             Dim tripleDesAlg As New TripleDESCryptoServiceProvider()
             Dim errors As Boolean
             Dim key As Byte() = TdesGen(password)
-            Dim iv As Byte() = New Byte() {0, 0, 0, 0, 0, 0, 0, 0}
+            Dim iv = New Byte() {0, 0, 0, 0, 0, 0, 0, 0}
             tripleDesAlg.Key = key
             tripleDesAlg.IV = iv
             Dim decryptor As ICryptoTransform = tripleDesAlg.CreateDecryptor()
@@ -231,7 +238,7 @@ Namespace FuckMyBytes
             Catch
                 return "fail"
             end try
-            Dim decryptedBytes As Byte()
+            Dim decryptedBytes As Byte() = Nothing
             Try
                 decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length)
             Catch ex As Exception
@@ -241,7 +248,7 @@ Namespace FuckMyBytes
                 Dim output As String = Encoding.UTF8.GetString(decryptedBytes)
                 Return output
             Else
-                Dim output As String = "fail"
+                Const output = "fail"
                 Return output
             End If
         End Function
