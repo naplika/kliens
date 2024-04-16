@@ -54,4 +54,7 @@
     <data name="nointernet" xml:space="preserve">
         <value>Internet not available, current data may be out of date.</value>
     </data>
+    <data name="schoolscmd" xml:space="preserve">
+        <value>schools &lt;school name or institute code&gt;</value>
+    </data>
 </root>

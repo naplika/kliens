@@ -8,19 +8,22 @@ Public MustInherit Class Commandparser
             if args.Length > 0 Then
                 if args(0) = "exit" Then
                     cmd_exit()
+
                 elseif args(0) = "clear" or args(0) = "cls" Then
                     Console.Clear()
                 elseif args(0) = "schools" Then
                     if args.Length < 2 Then
                         Console.ForegroundColor = ConsoleColor.Red
-                        Console.WriteLine("no")
+                        Console.WriteLine(SharedElements.GetTranslation("schoolscmd", lang))
                         Exit Sub
-
                     End If
                     searchschool(args(1)).Wait()
+                elseif args(0) = "help" Then
+                    SharedElements.help()
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))
+
                 End If
             End If
         End Sub)
