@@ -15,12 +15,6 @@ jobs:
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/cache@v4.0.2
-        with:
-          path: /path/to/qodana
-          key: ${{ runner.os }}-qodana-${{ hashFiles('**/qodana-*.tar.gz') }}
-          restore-keys: |
-            ${{ runner.os }}-qodana-
       - uses: actions/checkout@v4.1.1
         with:
           ref: ${{ github.event.pull_request.head.sha }}
