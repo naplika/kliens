@@ -1,4 +1,4 @@
-name: Qodana (with Caching)
+name: Qodana
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
         uses: JetBrains/qodana-action@v2023.3.2
         with:
           pr-mode: false
-          args: --apply-fixes
+          args: --apply-fixes --config qodana.yaml
           push-fixes: pull-request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
