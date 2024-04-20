@@ -1,4 +1,5 @@
-name: Qodana
+name: Qodana (with Caching)
+
 on:
   workflow_dispatch:
   pull_request:
@@ -14,12 +15,18 @@ jobs:
       pull-requests: write
       checks: write
     steps:
+      - uses: actions/cache@v3  # Cache Qodana tool (if applicable)
+        with:
+          path: /path/to/qodana  # Replace with your cache path
+          key: ${{ runner.os }}-qodana-${{ hashFiles('**/qodana-*.tar.gz') }}
+          restore-keys: |
+            ${{ runner.os }}-qodana-
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2023.3
+        uses: JetBrains/qodana-action@v2023.3.2
         with:
           pr-mode: false
           args: --apply-fixes
