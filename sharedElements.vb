@@ -130,4 +130,15 @@ Friend MustInherit Class SharedElements
             Return False
         End Try
     End Function
+
+    public shared function Help()
+
+        return True
+    End function
+
+    Public shared Function updateChecker() as Boolean
+        dim localversion as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+        dim client as HttpClient = new HttpClient()
+        client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
+    End Function
 End Class
