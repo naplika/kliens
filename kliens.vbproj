@@ -48,6 +48,9 @@
       <None Remove="build\osx-x64.zip" />
       <None Remove="build\win-x64.zip" />
         <None Remove="build\linux-x64.zip" />
+        <None Update="InsultGen\dirtywords.xml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
