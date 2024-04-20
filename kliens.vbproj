@@ -45,6 +45,8 @@
       <None Remove="N.ico" />
       <None Remove="crowdin.yml" />
       <None Remove="kliens.sln.DotSettings" />
+      <None Remove="build\osx-x64.zip" />
+      <None Remove="build\linux-x64.zip" />
     </ItemGroup>
 
     <ItemGroup>
