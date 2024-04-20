@@ -23,7 +23,7 @@ jobs:
         uses: JetBrains/qodana-action@v2023.3.2
         with:
           pr-mode: false
-          args: --ide,QDNET,--apply-fixes
+          args: --linter,jetbrains/qodana-cdnet:2024.1,--apply-fixes
           push-fixes: pull-request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
