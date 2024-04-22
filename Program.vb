@@ -11,6 +11,7 @@ Module Program
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
     private _decryptConf as string
+    private _internetavail as Boolean = true
 
     Sub Main()
         _decryptConf = SecurityMeasurements.decryptconfig()
@@ -19,11 +20,17 @@ Module Program
         Console.TreatControlCAsInput = true
         Console.Clear()
         Console.WriteLine(GetTranslation("welcome", Lang))
-        dim updatecheck = updateChecker()
-        if updateCheck = false Then
-            while updatecheck = false 
-                updatecheck = updateChecker()
-            End While
+        if SharedElements.CheckInternetConnection() = false Then
+            _internetavail = False
+            Console.WriteLine(GetTranslation("nointernet", Lang))
+        End If
+        if _internetavail = true Then
+            dim updatecheck = updateChecker()
+            if updateCheck = false Then
+                while updatecheck = false 
+                    updatecheck = updateChecker()
+                End While
+            End If
         End If
         Commandmode()
     End Sub

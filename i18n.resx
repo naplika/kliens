@@ -57,4 +57,7 @@
     <data name="schoolscmd" xml:space="preserve">
         <value>schools &lt;school name or institute code&gt;</value>
     </data>
+    <data name="updateavaiable" xml:space="preserve">
+        <value>A new update is avaiable, please update for the best experience.</value>
+    </data>
 </root>

@@ -154,14 +154,17 @@ Friend MustInherit Class SharedElements
             dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(remoteversion)
             ' check if it's an empty json
             if json.Count = 0 Then
-                Console.WriteLine("err")
                 return False
                 Else 
-                    Console.WriteLine(remoteversion)
+                    Console.WriteLine("local " + localversion.ToString())
+                    Console.WriteLine("new " + json("version").ToString())
+                    if localversion < json("version").ToString() Then
+                        Console.WriteLine(GetTranslation("updateavaiable", lang))
+                    End If
                     return true
             End If
             Else 
-                Console.WriteLine(response.StatusCode.ToString())
+                Console.WriteLine("Failed to check for updates: " + response.StatusCode.ToString())
                 return false
         End If
     End Function
