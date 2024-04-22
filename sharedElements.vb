@@ -19,6 +19,14 @@ Friend MustInherit Class SharedElements
         End if
         Return path
     End Function
+    
+    public shared function getSlashDirection() as String
+        if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            return "\"
+            Else 
+                return "/"
+        End If
+    End function
 
     public shared function GetTranslation(query as string, lang as string) as String
         Dim originalCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture
@@ -140,5 +148,21 @@ Friend MustInherit Class SharedElements
         dim localversion as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         dim client as HttpClient = new HttpClient()
         client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
+        dim response as HttpResponseMessage = client.GetAsync("https://naplika.balazsmanus.hu/api/v1/version").Result
+        if response.IsSuccessStatusCode Then
+            dim remoteversion as string = response.Content.ReadAsStringAsync().Result
+            dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(remoteversion)
+            ' check if it's an empty json
+            if json.Count = 0 Then
+                Console.WriteLine("err")
+                return False
+                Else 
+                    Console.WriteLine(remoteversion)
+                    return true
+            End If
+            Else 
+                Console.WriteLine(response.StatusCode.ToString())
+                return false
+        End If
     End Function
 End Class

@@ -19,6 +19,12 @@ Module Program
         Console.TreatControlCAsInput = true
         Console.Clear()
         Console.WriteLine(GetTranslation("welcome", Lang))
+        dim updatecheck = updateChecker()
+        if updateCheck = false Then
+            while updatecheck = false 
+                updatecheck = updateChecker()
+            End While
+        End If
         Commandmode()
     End Sub
 
