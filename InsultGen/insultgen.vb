@@ -3,7 +3,9 @@ imports System.Linq
 
 Namespace InsultGen
     Public Module Main
-        private ReadOnly DirtyWords as string = SharedElements.GetStartupPath() + "InsultGen"+ SharedElements.getSlashDirection() + "dirtywords.xml"
+        private ReadOnly _
+            DirtyWords as string = SharedElements.GetStartupPath() + "InsultGen" + SharedElements.getSlashDirection() +
+                                   "dirtywords.xml"
 
         public Function Insult() As String
             dim doc as XDocument = XDocument.Load(dirtywords)
@@ -28,13 +30,13 @@ Namespace InsultGen
                     : insu = adjectives(random.Next(adjectives.Count)) + ", " + adjectives(random.Next(adjectives.Count)) +
                              ", " + adjectives(random.Next(adjectives.Count)) + " " + nouns(random.Next(nouns.Count))
             End Select
-            dim asd as integer = random.Next(1,3)
+            dim asd as integer = random.Next(1, 3)
             if asd = 1 Then
                 insu = "Hogy rohadnál meg, te " + insu + "!"
-                else
-                    insu = "Te " + insu + "!"
+            else
+                insu = "Te " + insu + "!"
             End If
-return insu
+            return insu
         End Function
     End Module
 End Namespace

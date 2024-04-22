@@ -20,8 +20,8 @@ Public MustInherit Class Commandparser
                     searchschool(args(1)).Wait()
                 elseif args(0) = "help" Then
                     SharedElements.help()
-                    elseif args(0) = "insult" Then
-                        Console.WriteLine(InsultGen.Insult())
+                elseif args(0) = "insult" Then
+                    Console.WriteLine(InsultGen.Insult())
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))

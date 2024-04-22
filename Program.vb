@@ -27,7 +27,7 @@ Module Program
         if _internetavail = true Then
             dim updatecheck = updateChecker()
             if updateCheck = false Then
-                while updatecheck = false 
+                while updatecheck = false
                     updatecheck = updateChecker()
                 End While
             End If

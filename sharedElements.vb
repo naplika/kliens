@@ -19,12 +19,12 @@ Friend MustInherit Class SharedElements
         End if
         Return path
     End Function
-    
+
     public shared function GetSlashDirection() as String
         if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             return "\"
-            Else 
-                return "/"
+        Else
+            return "/"
         End If
     End function
 
@@ -155,24 +155,24 @@ Friend MustInherit Class SharedElements
             ' check if it's an empty json
             if json.Count = 0 Then
                 return False
-                Else 
-                    if localversion < json("version").ToString() Then
-                        Console.WriteLine(GetTranslation("updateavaiable", lang))
-                        Console.Writeline("Current: " + localversion)
-                        Console.WriteLine("New: " + json("version").ToString())
-                        elseif localversion > json("version").ToString() Then
-                            Console.WriteLine(GetTranslation("localversionnewer", Lang))
-                            Console.Writeline("Current: " + localversion)
-                            Console.WriteLine("New: " + json("version").ToString())
-                    End If
-                    return true
+            Else
+                if localversion < json("version").ToString() Then
+                    Console.WriteLine(GetTranslation("updateavaiable", lang))
+                    Console.Writeline("Current: " + localversion)
+                    Console.WriteLine("New: " + json("version").ToString())
+                elseif localversion > json("version").ToString() Then
+                    Console.WriteLine(GetTranslation("localversionnewer", Lang))
+                    Console.Writeline("Current: " + localversion)
+                    Console.WriteLine("New: " + json("version").ToString())
+                End If
+                return true
             End If
-            Else 
-                Console.WriteLine("Failed to check for updates: " + response.StatusCode.ToString())
-                return false
+        Else
+            Console.WriteLine("Failed to check for updates: " + response.StatusCode.ToString())
+            return false
         End If
     End Function
-    
+
     public shared Function GenLocalVer() As String
         dim version as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         ' let's assume the version it returns is 1.0.0.0
