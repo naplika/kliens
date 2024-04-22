@@ -174,7 +174,7 @@ Friend MustInherit Class SharedElements
                 return true
             End If
         Else
-            Console.WriteLine("Failed to check for updates: " + response.StatusCode.ToString())
+            Console.WriteLine("Update check failed: " + response.StatusCode.ToString())
             return false
         End If
     End Function

@@ -4,6 +4,7 @@ Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
+Imports System.Threading
 
 #Disable Warning BC42016
 
@@ -27,11 +28,18 @@ Module Program
         if _internetavail = true Then
             dim updatecheck = updateChecker()
             if updateCheck = false Then
+                dim fails as Integer = 0
                 while updatecheck = false
+                    Thread.Sleep(3000)
                     updatecheck = updateChecker()
+                    fails += 1
+                    if fails = 5 Then
+                        Exit While
+                    End If
                 End While
             End If
         End If
+        extends.ExMain.InitExtensions()
         Commandmode()
     End Sub
 
