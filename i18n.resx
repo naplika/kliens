@@ -63,4 +63,22 @@
     <data name="localversionnewer" xml:space="preserve">
         <value>Your version is newer than the official.</value>
     </data>
+    <data name="help-clear" xml:space="preserve">
+        <value>Clear screen</value>
+    </data>
+    <data name="helpheader" xml:space="preserve">
+        <value>Help</value>
+    </data>
+    <data name="help-schools" xml:space="preserve">
+        <value>Search for schools</value>
+    </data>
+    <data name="help-help" xml:space="preserve">
+        <value>Shows the help screen</value>
+    </data>
+    <data name="help-insult" xml:space="preserve">
+        <value>Prints out a hungarian insult</value>
+    </data>
+    <data name="help-config" xml:space="preserve">
+        <value>Edit the settings.json file</value>
+    </data>
 </root>

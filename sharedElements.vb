@@ -140,7 +140,13 @@ Friend MustInherit Class SharedElements
     End Function
 
     public shared function Help()
-
+        Console.WriteLine(GetTranslation("helpheader", Lang))
+        Console.WriteLine()
+        Console.WriteLine("clear/cls : " + GetTranslation("help-clear", Lang))
+        Console.WriteLine("schools <name/institute code> : " + GetTranslation("help-schools", Lang))
+        Console.WriteLine("help : " + GetTranslation("help-help", Lang))
+        Console.WriteLine("insult : " + GetTranslation("help-insult", Lang))
+        Console.WriteLine("config : " + GetTranslation("help-config", Lang))
         return True
     End function
 
