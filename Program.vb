@@ -10,7 +10,7 @@ imports kliens.FuckMyBytes
 Module Program
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
-    private _decryptConf as string
+    public _decryptConf as string
     private _internetavail as Boolean = true
 
     Sub Main()
@@ -58,7 +58,7 @@ Module Program
         return task
     End function
 
-    private function GetSettings(q as string) as String
+    public function GetSettings(q as string) as String
         dim jsonstring as string
         if _decryptConf = "fail" Then
             jsonstring = File.ReadAllText(Settingspath)

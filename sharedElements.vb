@@ -145,8 +145,8 @@ Friend MustInherit Class SharedElements
     End function
 
     Public shared Function UpdateChecker() as Boolean
-        dim localversion as string = genLocalVer()
-        dim client as HttpClient = new HttpClient()
+        dim localversion as string = GenLocalVer()
+        dim client = new HttpClient()
         client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
         dim response as HttpResponseMessage = client.GetAsync("https://naplika.balazsmanus.hu/api/v1/version").Result
         if response.IsSuccessStatusCode Then
@@ -173,11 +173,18 @@ Friend MustInherit Class SharedElements
         End If
     End Function
 
-    public shared Function GenLocalVer() As String
+    private Shared Function GenLocalVer() As String
         dim version as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         ' let's assume the version it returns is 1.0.0.0
         version = version.Replace(".0", "")
         version = "v" + version
         return version
+    End Function
+    
+    public shared Function PrintConfigables()
+        Console.WriteLine("Configurable elements")
+        Console.WriteLine("config <entry> <value>")
+        Console.WriteLine("language: " + GetSettings("language"))
+        return true
     End Function
 End Class
