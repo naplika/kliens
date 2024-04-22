@@ -10,11 +10,11 @@ imports kliens.FuckMyBytes
 Module Program
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
-    public _decryptConf as string
+    public DecryptConf as string
     private _internetavail as Boolean = true
 
     Sub Main()
-        _decryptConf = SecurityMeasurements.decryptconfig()
+        DecryptConf = SecurityMeasurements.decryptconfig()
         FirstStartupCheck().Wait()
         lang = GetSettings("language")
         Console.TreatControlCAsInput = true
@@ -39,12 +39,12 @@ Module Program
         dim task as task = task.Run(Sub()
             if File.Exists(Settingspath) Then
                 dim jsonString = ""
-                if _decryptConf = "fail" or _decryptConf = nothing Then
+                if DecryptConf = "fail" or DecryptConf = nothing Then
                     Console.WriteLine(GetTranslation("unencryptedconfig", lang))
                     upgradeconfig()
                     Environment.Exit(0)
                 Else
-                    jsonString = _decryptConf
+                    jsonString = DecryptConf
                 End If
                 dim jsonObject as JObject = JObject.Parse(jsonString)
                 if not jsonObject.ContainsKey("firstStartup") Then
@@ -60,10 +60,10 @@ Module Program
 
     public function GetSettings(q as string) as String
         dim jsonstring as string
-        if _decryptConf = "fail" Then
+        if DecryptConf = "fail" Then
             jsonstring = File.ReadAllText(Settingspath)
         Else
-            jsonstring = _decryptConf
+            jsonstring = DecryptConf
         End If
         try
             dim jsonobject as jobject = JObject.Parse(jsonstring)

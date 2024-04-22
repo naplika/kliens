@@ -24,7 +24,7 @@ Public MustInherit Class Commandparser
                     Console.WriteLine(InsultGen.Insult())
                 elseif args(0) = "debug" Then
                     if args.Length >= 2 AndAlso args(1) = "decryptconfig" Then
-                        IO.File.WriteAllText(SharedElements.GetStartupPath() + "settings.json", _decryptConf)
+                        IO.File.WriteAllText(SharedElements.GetStartupPath() + "settings.json", DecryptConf)
                         Console.WriteLine("Configuration decrypted.")
                         Environment.Exit(0)
                     End If
