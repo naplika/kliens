@@ -22,18 +22,18 @@ Public MustInherit Class Commandparser
                     SharedElements.help()
                 elseif args(0) = "insult" Then
                     Console.WriteLine(InsultGen.Insult())
-                    elseif args(0) = "debug" Then
-                        if args.Length >= 2 AndAlso args(1) = "decryptconfig" Then
-                            IO.File.WriteAllText(SharedElements.GetStartupPath() + "config.json", _decryptConf)
-                            Console.WriteLine("Configuration decrypted.")
-                            Environment.Exit(0)
-                        End If
-                    elseif args(0) = "config" then
-                        if args.Length < 2 Then
-                        SharedElements.printconfigables()    
-                        Else 
-                                
-                        End If
+                elseif args(0) = "debug" Then
+                    if args.Length >= 2 AndAlso args(1) = "decryptconfig" Then
+                        IO.File.WriteAllText(SharedElements.GetStartupPath() + "settings.json", _decryptConf)
+                        Console.WriteLine("Configuration decrypted.")
+                        Environment.Exit(0)
+                    End If
+                elseif args(0) = "config" then
+                    if args.Length < 2 Then
+                        SharedElements.printconfigables()
+                    Else
+
+                    End If
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))

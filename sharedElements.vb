@@ -180,7 +180,7 @@ Friend MustInherit Class SharedElements
         version = "v" + version
         return version
     End Function
-    
+
     public shared Function PrintConfigables()
         Console.WriteLine("Configurable elements")
         Console.WriteLine("config <entry> <value>")
