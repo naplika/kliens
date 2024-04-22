@@ -20,7 +20,7 @@ Friend MustInherit Class SharedElements
         Return path
     End Function
     
-    public shared function getSlashDirection() as String
+    public shared function GetSlashDirection() as String
         if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             return "\"
             Else 
@@ -144,7 +144,7 @@ Friend MustInherit Class SharedElements
         return True
     End function
 
-    Public shared Function updateChecker() as Boolean
+    Public shared Function UpdateChecker() as Boolean
         dim localversion as string = genLocalVer()
         dim client as HttpClient = new HttpClient()
         client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
@@ -160,6 +160,10 @@ Friend MustInherit Class SharedElements
                         Console.WriteLine(GetTranslation("updateavaiable", lang))
                         Console.Writeline("Current: " + localversion)
                         Console.WriteLine("New: " + json("version").ToString())
+                        elseif localversion > json("version").ToString() Then
+                            Console.WriteLine(GetTranslation("localversionnewer", Lang))
+                            Console.Writeline("Current: " + localversion)
+                            Console.WriteLine("New: " + json("version").ToString())
                     End If
                     return true
             End If
@@ -169,7 +173,7 @@ Friend MustInherit Class SharedElements
         End If
     End Function
     
-    public shared Function genLocalVer() As String
+    public shared Function GenLocalVer() As String
         dim version as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         ' let's assume the version it returns is 1.0.0.0
         version = version.Replace(".0", "")

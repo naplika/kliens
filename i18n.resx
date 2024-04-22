@@ -60,4 +60,7 @@
     <data name="updateavaiable" xml:space="preserve">
         <value>A new update is avaiable, please update for the best experience.</value>
     </data>
+    <data name="localversionnewer" xml:space="preserve">
+        <value>Your version is newer than the official.</value>
+    </data>
 </root>

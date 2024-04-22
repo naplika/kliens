@@ -1,11 +1,9 @@
 imports System.Xml.Linq
 imports System.Linq
-Imports System.Runtime.InteropServices.JavaScript
-Imports Org.BouncyCastle.Asn1.Cmp
 
 Namespace InsultGen
     Public Module Main
-        private ReadOnly dirtywords as string = SharedElements.GetStartupPath() + "InsultGen"+ SharedElements.getSlashDirection() + "dirtywords.xml"
+        private ReadOnly DirtyWords as string = SharedElements.GetStartupPath() + "InsultGen"+ SharedElements.getSlashDirection() + "dirtywords.xml"
 
         public Function Insult() As String
             dim doc as XDocument = XDocument.Load(dirtywords)
