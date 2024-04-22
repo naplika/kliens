@@ -150,4 +150,34 @@
   <data name="schoolgetfailed">
     <value>Couldn't download the school list from reFilc... %s</value>
   </data>
+  <data name="nointernet">
+    <value>Internet not available, current data may be out of date.</value>
+  </data>
+  <data name="schoolscmd">
+    <value>schools &amp;lt;school name or institute code&amp;gt;</value>
+  </data>
+  <data name="updateavaiable">
+    <value>A new update is avaiable, please update for the best experience.</value>
+  </data>
+  <data name="localversionnewer">
+    <value>Your version is newer than the official.</value>
+  </data>
+  <data name="help-clear">
+    <value>Clear screen</value>
+  </data>
+  <data name="helpheader">
+    <value>Help</value>
+  </data>
+  <data name="help-schools">
+    <value>Search for schools</value>
+  </data>
+  <data name="help-help">
+    <value>Shows the help screen</value>
+  </data>
+  <data name="help-insult">
+    <value>Prints out a hungarian insult</value>
+  </data>
+  <data name="help-config">
+    <value>Edit the settings.json file</value>
+  </data>
 </root>
