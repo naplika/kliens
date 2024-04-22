@@ -145,7 +145,7 @@ Friend MustInherit Class SharedElements
     End function
 
     Public shared Function updateChecker() as Boolean
-        dim localversion as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+        dim localversion as string = genLocalVer()
         dim client as HttpClient = new HttpClient()
         client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
         dim response as HttpResponseMessage = client.GetAsync("https://naplika.balazsmanus.hu/api/v1/version").Result
@@ -156,10 +156,10 @@ Friend MustInherit Class SharedElements
             if json.Count = 0 Then
                 return False
                 Else 
-                    Console.WriteLine("local " + localversion.ToString())
-                    Console.WriteLine("new " + json("version").ToString())
                     if localversion < json("version").ToString() Then
                         Console.WriteLine(GetTranslation("updateavaiable", lang))
+                        Console.Writeline("Current: " + localversion)
+                        Console.WriteLine("New: " + json("version").ToString())
                     End If
                     return true
             End If
@@ -167,5 +167,13 @@ Friend MustInherit Class SharedElements
                 Console.WriteLine("Failed to check for updates: " + response.StatusCode.ToString())
                 return false
         End If
+    End Function
+    
+    public shared Function genLocalVer() As String
+        dim version as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
+        ' let's assume the version it returns is 1.0.0.0
+        version = version.Replace(".0", "")
+        version = "v" + version
+        return version
     End Function
 End Class
