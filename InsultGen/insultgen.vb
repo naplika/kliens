@@ -1,6 +1,8 @@
 imports System.Xml.Linq
 imports System.Linq
 
+# Disable Warning BC42104
+
 Namespace InsultGen
     Public Module Main
         private ReadOnly _

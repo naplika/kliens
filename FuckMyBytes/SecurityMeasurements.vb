@@ -33,45 +33,45 @@ Namespace FuckMyBytes
             return mix
         End Function
 
-        public function FuckString(str as string) as String
+        public function FuckString(str as string, Optional pass as string = "Naplika") as String
             dim step1 as Byte() = Utf8.GetBytes(str)
             dim step2 as string = "I'm nothing like yall" + Convert.ToBase64String(step1)
 
-            dim step3 as string = AES_Encrypt(step2, program.Uniquepass)
+            dim step3 as string = AES_Encrypt(step2, pass)
 
             dim step4 as string = GzipCompress(step3)
 
-            dim step5 as string = DesEncrypt(step4, LengthController(Program.Uniquepass, 8))
+            dim step5 as string = DesEncrypt(step4, LengthController(Pass, 8))
 
-            dim step6 as string = IdeaEncrypt(step5, LengthController(Program.Uniquepass, 128))
+            dim step6 as string = IdeaEncrypt(step5, LengthController(Pass, 128))
 
             dim step7 as string = GzipCompress(step6)
 
-            dim step8 as string = TripleDesEncrypt(step7, Program.Uniquepass)
+            dim step8 as string = TripleDesEncrypt(step7, pass)
 
             return step8
         End Function
 
-        private function UnFuckString(str as string) as String
-            dim step1 as string = TripleDesDecrypt(str, Program.Uniquepass)
+        public function UnFuckString(str as string, Optional pass as string = "Naplika") as String
+            dim step1 as string = TripleDesDecrypt(str, Pass)
             if step1 = "fail" Then
                 return "fail"
             End If
             dim step2 as string = GzipDecompress(step1)
 
-            dim step3 as string = IdeaDecrypt(step2, LengthController(Program.Uniquepass, 128))
+            dim step3 as string = IdeaDecrypt(step2, LengthController(Pass, 128))
 
             if step3 = "fail" Then
                 return "fail"
             End If
-            dim step4 as string = DesDecrypt(step3, LengthController(Program.Uniquepass, 8))
+            dim step4 as string = DesDecrypt(step3, LengthController(Pass, 8))
 
             if step4 = "fail" Then
                 return "fail"
             End If
             dim step5 as string = GzipDecompress(step4)
 
-            dim step6 as string = AES_Decrypt(step5, program.Uniquepass)
+            dim step6 as string = AES_Decrypt(step5, pass)
 
             if step6 = "fail" Then
                 return "fail"
@@ -93,7 +93,7 @@ Namespace FuckMyBytes
         public Function DecryptConfig() As String
             if File.Exists(Settingspath) Then
                 dim str as string = io.File.ReadAllText(Settingspath)
-                str = UnFuckString(str)
+                str = UnFuckString(str, program.Uniquepass)
                 str = str.Replace(vbcrlf, "").Replace(vbLf, "").Replace(vbCr, "").Replace("  ", "")
                 return str
             Else
@@ -103,7 +103,7 @@ Namespace FuckMyBytes
 
         public function UpgradeConfig()
             dim config as string = io.File.ReadAllText(Settingspath)
-            dim output as string = FuckString(config)
+            dim output as string = FuckString(config, program.Uniquepass)
             IO.File.WriteAllText(Settingspath, output)
             return true
         End function

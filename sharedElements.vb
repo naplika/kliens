@@ -139,7 +139,7 @@ Friend MustInherit Class SharedElements
         End Try
     End Function
 
-    public shared function Help()
+    public shared function Help() as Boolean
         Console.WriteLine(GetTranslation("helpheader", Lang))
         Console.WriteLine()
         Console.WriteLine("clear/cls : " + GetTranslation("help-clear", Lang))
@@ -187,10 +187,10 @@ Friend MustInherit Class SharedElements
         return version
     End Function
 
-    public shared Function PrintConfigables()
+    public shared Function PrintConfigables() as Boolean
         Console.WriteLine("Configurable elements")
         Console.WriteLine("config <entry> <value>")
         Console.WriteLine("language: " + GetSettings("language"))
-        return true
+        return True
     End Function
 End Class
