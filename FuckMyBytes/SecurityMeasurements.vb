@@ -101,6 +101,17 @@ Namespace FuckMyBytes
             End If
         End Function
 
+        public Function DecryptAuth() As String
+            if File.Exists(loginpath) Then
+                dim str as string = io.File.ReadAllText(loginpath)
+                str = UnFuckString(str, program.Uniquepass)
+                str = str.Replace(vbcrlf, "").Replace(vbLf, "").Replace(vbCr, "").Replace("  ", "")
+                return str
+            Else
+                return "fail"
+            End If
+        End Function
+        
         public function UpgradeConfig()
             dim config as string = io.File.ReadAllText(Settingspath)
             dim output as string = FuckString(config, program.Uniquepass)

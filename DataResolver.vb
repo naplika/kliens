@@ -87,14 +87,12 @@ Public MustInherit Class DataResolver
                 dim json as JObject = JObject.Parse(content)
                 dim token as string = json("access_token").ToString()
                 dim tokenparts as String() = token.Split(".")
-                dim signature as string =
-                        FuckMyBytes.LengthController(
-                            BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", ""),
-                            5)
-                Console.WriteLine("Authorization Signature: " + signature)
+                dim signature as string = BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", "")
+                Console.WriteLine("Authorization Signature: " + FuckMyBytes.LengthController(signature, 5))
                 dim payload as JObject =
                         JObject.Parse(System.Text.Encoding.UTF8.GetString(SharedElements.Base64UrlDecode(tokenparts(1))))
                 Console.WriteLine(GetTranslation("hellouser", Lang).Replace("%s", payload("name").ToString()))
+                SaveLogin(content, signature, username, institutecode)
             Else
                 Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())
             End If

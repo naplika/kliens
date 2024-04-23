@@ -12,10 +12,13 @@ Module Program
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
     public DecryptConf as string
+    public DecryptAuth as string
     private _internetavail as Boolean = true
+    
 
     Sub Main()
         DecryptConf = SecurityMeasurements.decryptconfig()
+        DecryptAuth = SecurityMeasurements.DecryptAuth()
         FirstStartupCheck().Wait()
         lang = GetSettings("language")
         Console.TreatControlCAsInput = true
@@ -28,7 +31,7 @@ Module Program
         if _internetavail = true Then
             dim updatecheck = updateChecker()
             if updateCheck = false Then
-                dim fails as Integer = 0
+                dim fails = 0
                 while updatecheck = false
                     Thread.Sleep(3000)
                     updatecheck = updateChecker()

@@ -3,13 +3,17 @@ imports System.Runtime.InteropServices
 imports System.resources
 imports Microsoft.Win32
 imports System.Diagnostics
+Imports System.IO
 Imports System.Net.Http
+Imports System.Text.Json.Nodes
 Imports System.Text.RegularExpressions
+Imports Newtonsoft.Json.Linq
 
 #Disable Warning BC42016
 
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
+    public shared ReadOnly Loginpath as string = GetStartupPath() + "authorization.json"
 
     Public shared Function GetStartupPath() As String
         dim path as string = IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
@@ -140,7 +144,7 @@ Friend MustInherit Class SharedElements
         End Try
     End Function
 
-    public shared function Help() as Boolean
+    public shared function Help()
         Console.WriteLine(GetTranslation("helpheader", Lang))
         Console.WriteLine()
         Console.WriteLine("clear/cls : " + GetTranslation("help-clear", Lang))
@@ -148,7 +152,7 @@ Friend MustInherit Class SharedElements
         Console.WriteLine("help : " + GetTranslation("help-help", Lang))
         Console.WriteLine("insult : " + GetTranslation("help-insult", Lang))
         Console.WriteLine("config : " + GetTranslation("help-config", Lang))
-        return True
+        return 0
     End function
 
     Public shared Function UpdateChecker() as Boolean
@@ -188,11 +192,11 @@ Friend MustInherit Class SharedElements
         return version
     End Function
 
-    public shared Function PrintConfigables() as Boolean
+    public shared Function PrintConfigables()
         Console.WriteLine("Configurable elements")
         Console.WriteLine("config <entry> <value>")
         Console.WriteLine("language: " + GetSettings("language"))
-        return True
+        return 0
     End Function
 
     Public shared Function Base64UrlDecode(base64Url As String) As Byte()
@@ -209,5 +213,35 @@ Friend MustInherit Class SharedElements
     Public Shared Function IsBase64String(s As String) As Boolean
         s = s.Trim()
         Return (s.Length Mod 4 = 0) AndAlso Regex.IsMatch(s, "^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None)
+    End Function
+
+    public shared function SaveLogin(response as String, signature as String, optional name as string = "guest",
+                                     optional school as string = "Naplika")
+        dim jsonobj = new JsonObject()
+        dim json as JObject = JObject.Parse(response)
+        dim token as string = json("access_token").ToString()
+        jsonobj.Add("token", token)
+        dim refresh as string = json("refresh_token").ToString()
+        jsonobj.Add("refresh", refresh)
+        ' response gives 1800, maybe its 30 minutes
+        dim expiretime as DateTime = DateTime.Now.AddMinutes(30)
+        dim unixtime as string = ToUnixTimestamp(expiretime).ToString()
+        jsonobj.Add("expire", unixtime)
+        jsonobj.Add("signature", FuckMyBytes.LengthController(signature, 10))
+        dim jsonstring as string = jsonobj.ToString()
+        jsonstring = FuckMyBytes.FuckString(jsonstring, program.Uniquepass)
+        File.WriteAllText(loginpath, jsonstring)
+        dim confjson as JObject = JObject.Parse(DecryptConf)
+        confjson("user") = name
+        confjson("school") = school
+        dim updconf as string = confjson.ToString()
+        updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
+        File.WriteAllText(Settingspath, updconf)
+        return 0
+    End function
+
+    Private Shared Function ToUnixTimestamp(dateTime As DateTime) As Long
+        Dim dateTimeOffset = new DateTimeOffset(dateTime)
+        Return dateTimeOffset.ToUnixTimeSeconds()
     End Function
 End Class
