@@ -23,3 +23,7 @@ Elvárások:
 * x64 (amd64) képes processzor és rendszer
 * minimum 20MiB ram (rendszer nincs bele számítva)
 * .NET 8 (Ha self-buildelsz)
+
+## Építés
+
+Mielött építenél, lesz egy kimaradt mappa ami elérhető itt: [naplika/extendspublic](https://github.com/naplika/extendspublic)
