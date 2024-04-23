@@ -34,6 +34,12 @@ Public MustInherit Class Commandparser
                     Else
 
                     End If
+                    elseif args(0) = "login" Then
+                        if args.Length < 4 Then
+                            Console.WriteLine("login <username> <password> <institutecode>")
+                            Else 
+                                DataResolver.Authorize(args(1), args(2), args(3)).Wait()
+                        End If
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))

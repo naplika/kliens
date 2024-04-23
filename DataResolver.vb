@@ -1,6 +1,9 @@
 Imports System.Net.Http
 imports kliens.SharedElements
 imports Newtonsoft.Json.Linq
+imports System.Security.Cryptography
+imports System.Text
+Imports HMac = Org.BouncyCastle.Crypto.Macs.HMac
 
 Public MustInherit Class DataResolver
     private shared ReadOnly Client as HttpClient = new HttpClient()
@@ -55,5 +58,58 @@ Public MustInherit Class DataResolver
             End If
         end sub)
         return task
+    End function
+    
+    public shared function Authorize(username as string, password as String, institutecode as String) as Task
+        dim task as task = task.Run(Sub()
+            dim nonce as string = GenerateNonce()
+            Console.WriteLine("nonce " + nonce)
+            if nonce = "fail" Then
+                exit Sub
+            End If
+            dim policyKey as string = GenerateAuthorizationPolicy(username,institutecode,nonce)
+            Console.WriteLine("polkey " + policyKey)
+            Client.DefaultRequestHeaders.Add("X-Authorizationpolicy-Key", policyKey)
+            Client.DefaultRequestHeaders.add("X-Authorizationpolicy-Version", "v2")
+            Client.DefaultRequestHeaders.Add("X-Authorizationpolicy-Nonce", nonce)
+            dim response as HttpResponseMessage = client.PostAsync("https://idp.e-kreta.hu/connect/token", New FormUrlEncodedContent(New Dictionary(Of String, String) From {
+                {"userName", username},
+                {"password", password},
+                {"institute_code", institutecode},
+                {"grant_type", "password"},
+                {"client_id", "kreta-ellenorzo-mobile-android"}
+            })).Result
+            Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Key")
+            Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Nonce")
+            Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Version")
+            if response.IsSuccessStatusCode Then
+                dim content as string = response.Content.ReadAsStringAsync().Result
+                Console.WriteLine(content)
+            Else
+                Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())
+            End If
+            end sub)
+        return task
+    End function
+    
+    private shared function GenerateNonce() as String
+        Client.DefaultRequestHeaders.Remove("User-Agent")
+        dim response as HttpResponseMessage = client.GetAsync("https://idp.e-kreta.hu/nonce").Result
+        if response.IsSuccessStatusCode Then
+              return response.Content.ReadAsStringAsync().Result
+            Else 
+                Console.WriteLine("Failed to generate nonce, " + response.StatusCode.ToString())
+                return "fail"
+        End If
+    End function
+    
+    private shared function GenerateAuthorizationPolicy(username as String, instituteCode as String, nonce as string) as string
+        dim hmacKey as string = "baSsxOwlU1jM"
+        dim keybytes as Byte() = Encoding.UTF8.GetBytes(hmacKey)
+        dim text as string = (instituteCode.ToUpper() + nonce + username.ToUpper())
+        using hmac as new HMACSHA512(keybytes)
+            dim computedHash as Byte() = hmac.ComputeHash(Encoding.UTF8.GetBytes(text))
+            return Convert.toBase64String(computedHash)
+        End Using
     End function
 End Class
