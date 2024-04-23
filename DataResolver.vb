@@ -3,7 +3,6 @@ imports kliens.SharedElements
 imports Newtonsoft.Json.Linq
 imports System.Security.Cryptography
 imports System.Text
-Imports HMac = Org.BouncyCastle.Crypto.Macs.HMac
 
 Public MustInherit Class DataResolver
     private shared ReadOnly Client as HttpClient = new HttpClient()
