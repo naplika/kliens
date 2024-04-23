@@ -10,7 +10,7 @@ Imports System.Text.RegularExpressions
 Imports Newtonsoft.Json.Linq
 
 #Disable Warning BC42016
-
+# Disable Warning BC42021
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
     public shared ReadOnly Loginpath as string = GetStartupPath() + "authorization.json"
