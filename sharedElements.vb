@@ -159,7 +159,7 @@ Friend MustInherit Class SharedElements
         dim localversion as string = GenLocalVer()
         dim client = new HttpClient()
         client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UpdateChecker")
-        dim response as HttpResponseMessage = client.GetAsync("https://naplika.balazsmanus.hu/api/v1/version").Result
+        dim response as HttpResponseMessage = client.GetAsync("https://naplika.mnus.hu/api/v1/version").Result
         if response.IsSuccessStatusCode Then
             dim remoteversion as string = response.Content.ReadAsStringAsync().Result
             dim json As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(remoteversion)
