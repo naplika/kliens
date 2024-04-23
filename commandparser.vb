@@ -46,6 +46,12 @@ Public MustInherit Class Commandparser
                             Else 
                                 DataResolver.Authorize(args(1), args(2), args(3)).Wait()
                         End If
+                elseif args(0) = "logout" Then
+                    if args.Length < 2 Then
+                        Console.WriteLine("logout confirm")
+                    Else
+                        SharedElements.DeleteLogin()
+                    End If
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
                     Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))

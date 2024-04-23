@@ -131,7 +131,7 @@ Friend MustInherit Class SharedElements
     Public shared Function CheckInternetConnection() As Boolean
         Try
             Using client = New HttpClient()
-                Using stream = client.GetAsync("http://www.google.com").Result
+                Using stream = client.GetAsync("https://www.google.com").Result
                     if stream.IsSuccessStatusCode Then
                         Return True
                     Else
@@ -237,9 +237,22 @@ Friend MustInherit Class SharedElements
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)
+        updatedconfig = true
         return 0
     End function
 
+    public shared function DeleteLogin()
+        dim json as JObject = JObject.Parse(DecryptConf)
+        json("user") = "guest"
+        json("school") = "Naplika"
+        dim jstring as string = json.ToString()
+        jstring = FuckMyBytes.FuckString(jstring, program.Uniquepass)
+        File.WriteAllText(Settingspath, jstring)
+        File.Delete(Loginpath)
+        updatedconfig = True
+        return 0
+    End function
+    
     Private Shared Function ToUnixTimestamp(dateTime As DateTime) As Long
         Dim dateTimeOffset = new DateTimeOffset(dateTime)
         Return dateTimeOffset.ToUnixTimeSeconds()

@@ -9,6 +9,7 @@ Imports System.Threading
 #Disable Warning BC42016
 
 Module Program
+    public updatedconfig as boolean = False
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
     public DecryptConf as string
@@ -86,6 +87,12 @@ Module Program
     End function
 
     private sub Commandmode(optional byval lastcommand as string = Nothing)
+        ' shitty config updater, but it will do
+        if updatedconfig = true Then
+            DecryptConf = SecurityMeasurements.decryptconfig()
+            DecryptAuth = SecurityMeasurements.DecryptAuth()
+            updatedconfig = False
+        End If
         dim username as string = GetSettings("user")
         dim school as string = GetSettings("school")
         Console.ForegroundColor = consolecolor.Gray
