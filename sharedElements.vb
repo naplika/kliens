@@ -4,6 +4,7 @@ imports System.resources
 imports Microsoft.Win32
 imports System.Diagnostics
 Imports System.Net.Http
+Imports System.Text.RegularExpressions
 
 #Disable Warning BC42016
 
@@ -192,5 +193,21 @@ Friend MustInherit Class SharedElements
         Console.WriteLine("config <entry> <value>")
         Console.WriteLine("language: " + GetSettings("language"))
         return True
+    End Function
+
+    Public shared Function Base64UrlDecode(base64Url As String) As Byte()
+        base64Url = base64Url.Replace("-", "+").Replace("_", "/")
+        Select Case base64Url.Length Mod 4
+            Case 2
+                base64Url &= "=="
+            Case 3
+                base64Url &= "="
+        End Select
+        Return Convert.FromBase64String(base64Url)
+    End Function
+
+    Public Shared Function IsBase64String(s As String) As Boolean
+        s = s.Trim()
+        Return (s.Length Mod 4 = 0) AndAlso Regex.IsMatch(s, "^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None)
     End Function
 End Class

@@ -81,4 +81,7 @@
     <data name="help-config" xml:space="preserve">
         <value>Edit the settings.json file</value>
     </data>
+    <data name="hellouser" xml:space="preserve">
+        <value>Hello, %s!</value>
+    </data>
 </root>

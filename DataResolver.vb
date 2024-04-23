@@ -84,7 +84,17 @@ Public MustInherit Class DataResolver
             Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Version")
             if response.IsSuccessStatusCode Then
                 dim content as string = response.Content.ReadAsStringAsync().Result
-                Console.WriteLine(content)
+                dim json as JObject = JObject.Parse(content)
+                dim token as string = json("access_token").ToString()
+                dim tokenparts as String() = token.Split(".")
+                dim signature as string =
+                        FuckMyBytes.LengthController(
+                            BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", ""),
+                            5)
+                Console.WriteLine("Authorization Signature: " + signature)
+                dim payload as JObject =
+                        JObject.Parse(System.Text.Encoding.UTF8.GetString(SharedElements.Base64UrlDecode(tokenparts(1))))
+                Console.WriteLine(GetTranslation("hellouser", Lang).Replace("%s", payload("name").ToString()))
             Else
                 Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())
             End If
@@ -113,4 +123,5 @@ Public MustInherit Class DataResolver
             return Convert.toBase64String(computedHash)
         End Using
     End function
+    
 End Class
