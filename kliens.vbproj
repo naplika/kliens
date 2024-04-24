@@ -53,6 +53,7 @@
         <None Update="InsultGen\dirtywords.xml">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <Compile Remove="CommandLineEssentials\commandlineEssentials.vb" />
     </ItemGroup>
 
     <ItemGroup>

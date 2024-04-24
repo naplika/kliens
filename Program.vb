@@ -8,7 +8,7 @@ imports kliens.commandlineEssentials
 #Disable Warning BC42016
 
 Module Program
-    public updatedconfig as boolean = False
+    public Updatedconfig as boolean = False
     public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
     public Lang as String
     public DecryptConf as string
@@ -42,7 +42,7 @@ Module Program
             End If
         End If
         extends.ExMain.InitExtensions()
-        Commandmode()
+        CommandLineEssentials.Base.CommandMode()
     End Sub
 
     Private function FirstStartupCheck() as task
