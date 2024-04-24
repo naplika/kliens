@@ -7,10 +7,8 @@ public Class ButtonParser
         Console.ForegroundColor = DefaultColor
         dim commandArray as String() = Command.ToString().Split(" ")
         CommandParser.ParseCommand(commandArray).Wait()
-        ' debug write commandarray to console
-        Console.Writeline("String arrayised " + String.Join(" ", commandArray))
-        Console.WriteLine("def " + String.Join(" ", Command))
         Command.Clear()
+        CursorPos = 0
         for i = 0 to CommandArray.Length -1 
             LastCommand += CommandArray(i) + " "
         Next
