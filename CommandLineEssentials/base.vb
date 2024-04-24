@@ -2,10 +2,11 @@ Namespace CommandLineEssentials
 Public Class Base
     public shared sub CommandMode(optional byval lastcommand as string = Nothing)
         Console.ForegroundColor = SharedElements.ConsoleSet.DefaultColor
-        SharedElements.UpdateConfig()
+        SharedElements.UpdateConfig(True)
         Console.Write(SharedElements.ConsoleSet.Whoami)
         Console.ForegroundColor = SharedElements.ConsoleSet.CommandColor
         while True
+            SharedElements.UpdateConfig(False)
             dim KeyInfo as ConsoleKeyInfo = console.ReadKey(True)
             if KeyInfo.Key = Consolekey.Enter Then
                 ButtonParser.EnterKey()
