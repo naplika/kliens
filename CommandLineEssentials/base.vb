@@ -3,8 +3,8 @@ Public Class Base
     public shared sub CommandMode(optional byval lastcommand as string = Nothing)
         SharedElements.UpdateConfig()
         Console.Write(SharedElements.ConsoleSet.Whoami)
-        dim KeyInfo as ConsoleKeyInfo = console.ReadKey(True)
         while True
+            dim KeyInfo as ConsoleKeyInfo = console.ReadKey(True)
             if KeyInfo.Key = Consolekey.Enter Then
                 ButtonParser.EnterKey()
                 Continue While
