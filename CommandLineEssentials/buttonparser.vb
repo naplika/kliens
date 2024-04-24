@@ -1,11 +1,15 @@
+Imports System.Runtime.InteropServices.JavaScript
 imports kliens.CommandLineEssentials.SharedElements.ConsoleSet
 Namespace CommandLineEssentials
 public Class ButtonParser
     public shared sub EnterKey
         Console.WriteLine()
         Console.ForegroundColor = DefaultColor
-        dim CommandArray as String() = Command.ToString().Split(" ")
-        CommandParser.ParseCommand(CommandArray).Wait()
+        dim commandArray as String() = Command.ToString().Split(" ")
+        CommandParser.ParseCommand(commandArray).Wait()
+        ' debug write commandarray to console
+        Console.Writeline("String arrayised " + String.Join(" ", commandArray))
+        Console.WriteLine("def " + String.Join(" ", Command))
         Command.Clear()
         for i = 0 to CommandArray.Length -1 
             LastCommand += CommandArray(i) + " "
@@ -19,10 +23,10 @@ public Class ButtonParser
         Environment.Exit(0)
     End sub
     public shared sub Backspace
-        if Command.Length > 0 andalso CursorPos > 0 Then
+        if Command.Length > 0 and cursorPos > 0 Then
         Command.Remove(CursorPos -1,1)
             CursorPos -=1
-            Console.SetCursorPosition(Console.CursorLeft-1, console.CursorTop)
+            Console.SetCursorPosition(Whoami.Length + CursorPos, console.CursorTop)
             Console.Write(" ")
             Console.SetCursorPosition(Whoami.Length + CursorPos, console.CursorTop)
         Else 

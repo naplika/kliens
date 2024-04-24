@@ -17,7 +17,7 @@ Public Class Base
                         ButtonParser.UpArrow()
                         Continue While
             End If
-            Command.Append(KeyInfo.KeyChar)
+           SharedElements.ConsoleSet. Command.Append(KeyInfo.KeyChar)
             console.Write(KeyInfo.KeyChar)
             SharedElements.ConsoleSet.CursorPos +=1
             Console.SetCursorPosition(SharedElements.ConsoleSet.Whoami.Length + SharedElements.ConsoleSet.CursorPos, console.CursorTop)
