@@ -111,7 +111,7 @@ Namespace FuckMyBytes
                 return "fail"
             End If
         End Function
-        
+
         public function UpgradeConfig()
             dim config as string = io.File.ReadAllText(Settingspath)
             dim output as string = FuckString(config, program.Uniquepass)

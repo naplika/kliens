@@ -11,6 +11,7 @@ Imports Newtonsoft.Json.Linq
 
 #Disable Warning BC42016
 # Disable Warning BC42021
+
 Friend MustInherit Class SharedElements
     public shared ReadOnly Settingspath as string = GetStartupPath() + "settings.json"
     public shared ReadOnly Loginpath as string = GetStartupPath() + "authorization.json"
@@ -252,7 +253,7 @@ Friend MustInherit Class SharedElements
         updatedconfig = True
         return 0
     End function
-    
+
     Private Shared Function ToUnixTimestamp(dateTime As DateTime) As Long
         Dim dateTimeOffset = new DateTimeOffset(dateTime)
         Return dateTimeOffset.ToUnixTimeSeconds()

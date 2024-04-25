@@ -5,6 +5,7 @@ imports kliens.SharedElements
 imports kliens.FuckMyBytes
 Imports System.Threading
 imports kliens.commandlineEssentials
+
 #Disable Warning BC42016
 
 Module Program
@@ -14,7 +15,7 @@ Module Program
     public DecryptConf as string
     public DecryptAuth as string
     private _internetavail as Boolean = true
-    
+
     Sub Main()
         DecryptConf = SecurityMeasurements.decryptconfig()
         DecryptAuth = SecurityMeasurements.DecryptAuth()

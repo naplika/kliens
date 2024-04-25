@@ -27,8 +27,8 @@ Public MustInherit Class Commandparser
                         IO.File.WriteAllText(SharedElements.GetStartupPath() + "settings.json", DecryptConf)
                         Console.WriteLine("Configuration decrypted.")
                         Environment.Exit(0)
-                        elseif args.Length = 3 AndAlso args(1) = "fuckstring" Then
-                            Console.WriteLine(FuckMyBytes.FuckString(args(2)))
+                    elseif args.Length = 3 AndAlso args(1) = "fuckstring" Then
+                        Console.WriteLine(FuckMyBytes.FuckString(args(2)))
                     elseif args.Length >= 2 AndAlso args(1) = "decryptauth" Then
                         IO.File.WriteAllText(SharedElements.GetStartupPath() + "authorization.json", DecryptAuth)
                         Console.WriteLine("Authorisation dump decrypted.")
@@ -40,12 +40,12 @@ Public MustInherit Class Commandparser
                     Else
 
                     End If
-                    elseif args(0) = "login" Then
-                        if args.Length < 4 Then
-                            Console.WriteLine("login <username> <password> <institutecode>")
-                            Else 
-                                DataResolver.Authorize(args(1), args(2), args(3)).Wait()
-                        End If
+                elseif args(0) = "login" Then
+                    if args.Length < 4 Then
+                        Console.WriteLine("login <username> <password> <institutecode>")
+                    Else
+                        DataResolver.Authorize(args(1), args(2), args(3)).Wait()
+                    End If
                 elseif args(0) = "logout" Then
                     if args.Length < 2 Then
                         Console.WriteLine("logout confirm")
