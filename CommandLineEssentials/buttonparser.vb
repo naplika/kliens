@@ -1,4 +1,3 @@
-Imports System.Runtime.InteropServices.JavaScript
 imports kliens.CommandLineEssentials.SharedElements.ConsoleSet
 
 Namespace CommandLineEssentials

@@ -7,7 +7,7 @@ Namespace CommandLineEssentials
             Console.ForegroundColor = SharedElements.ConsoleSet.CommandColor
             while True
                 SharedElements.UpdateConfig(False)
-                dim KeyInfo as ConsoleKeyInfo = console.ReadKey(True)
+                dim keyInfo as ConsoleKeyInfo = console.ReadKey(True)
                 if KeyInfo.Key = Consolekey.Enter Then
                     ButtonParser.EnterKey()
                     Continue While
