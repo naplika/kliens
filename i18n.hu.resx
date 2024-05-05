@@ -166,13 +166,13 @@
     <value>Clear screen</value>
   </data>
   <data name="helpheader">
-    <value>Help</value>
+    <value>Súgó</value>
   </data>
   <data name="help-schools">
-    <value>Search for schools</value>
+    <value>Iskolák keresése</value>
   </data>
   <data name="help-help">
-    <value>Shows the help screen</value>
+    <value>Megjeleníti a súgót</value>
   </data>
   <data name="help-insult">
     <value>Prints out a hungarian insult</value>
