@@ -130,7 +130,7 @@
     <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
   </data>
   <data name="filecached">
-    <value>There was already a cached version that was updated %s of minutes ago.</value>
+    <value>Már volt egy gyorsítótárazott verzió, ami %s perce lett frissítve.</value>
   </data>
   <data name="searchhit">
     <value>%s. Találat</value>
@@ -142,28 +142,28 @@
     <value>Ha lehet, legyél egy kicsit specifikusabb a névvel.</value>
   </data>
   <data name="unencryptedconfig">
-    <value>You are using the old unencrypted config, encrypting now...</value>
+    <value>A régi, titkosítatlan konfigurációt használod, titkosítás...</value>
   </data>
   <data name="settingloadfailed">
-    <value>failed to retrieve %s from config</value>
+    <value>nem sikerült lekérdezni %s-t a configból</value>
   </data>
   <data name="schoolgetfailed">
-    <value>Couldn't download the school list from reFilc... %s</value>
+    <value>Nem sikerült letölteni az iskolák listáját a reFilc-ből... %s</value>
   </data>
   <data name="nointernet">
-    <value>Internet not available, current data may be out of date.</value>
+    <value>Internet nem elérhető, az aktuális adatok elavultak lehetnek.</value>
   </data>
   <data name="schoolscmd">
-    <value>schools &amp;lt;school name or institute code&amp;gt;</value>
+    <value>iskolák &amp;lt;school name or institute code&amp;gt;</value>
   </data>
   <data name="updateavaiable">
-    <value>A new update is avaiable, please update for the best experience.</value>
+    <value>Új frissítés érhető el, frissíts a legjobb élmény érdekében.</value>
   </data>
   <data name="localversionnewer">
-    <value>Your version is newer than the official.</value>
+    <value>A te verziód újabb, mint a hivatalos.</value>
   </data>
   <data name="help-clear">
-    <value>Clear screen</value>
+    <value>Kijelző letörlése</value>
   </data>
   <data name="helpheader">
     <value>Súgó</value>
@@ -175,9 +175,9 @@
     <value>Megjeleníti a súgót</value>
   </data>
   <data name="help-insult">
-    <value>Prints out a hungarian insult</value>
+    <value>Kiír egy magyar beszólást</value>
   </data>
   <data name="help-config">
-    <value>Edit the settings.json file</value>
+    <value>A settings.json fájl szerkesztése</value>
   </data>
 </root>
