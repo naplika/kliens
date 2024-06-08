@@ -20,6 +20,7 @@ Module Program
         DecryptAuth = SecurityMeasurements.DecryptAuth()
         FirstStartupCheck().Wait()
         lang = GetSettings("language")
+        DataResolver.GetUserAgent()
         Console.TreatControlCAsInput = true
         Console.Clear()
         Console.WriteLine(GetTranslation("welcome", Lang))

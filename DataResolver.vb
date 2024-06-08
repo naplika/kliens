@@ -3,11 +3,12 @@ imports kliens.SharedElements
 imports Newtonsoft.Json.Linq
 imports System.Security.Cryptography
 imports System.Text
+Imports System.Threading.Tasks.Sources
 
 Public MustInherit Class DataResolver
     private shared ReadOnly Client as HttpClient = new HttpClient()
     private shared readonly Schoolspath as string = GetStartupPath() + "schools.json"
-
+    public shared UserAgent as string = ""
     public shared function SearchSchool(query as string) as Task
         dim task as task = task.Run(Sub()
             dim schooldata as string
@@ -58,7 +59,24 @@ Public MustInherit Class DataResolver
         end sub)
         return task
     End function
-
+    
+    public shared function GetUserAgent() as Task
+        dim task as task = task.Run(Sub()
+            dim version as string
+            Client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #UserAgent")
+            dim response as HttpResponseMessage = Client.GetAsync("https://api.refilc.hu/v1/public/client/version/latest/name").Result
+            if response.IsSuccessStatusCode Then
+                version = response.Content.ReadAsStringAsync().Result
+            Else
+                version = "4.5.1"
+            End If
+            dim ua = "hu.ekreta.student/$0 $1/$2"
+            UserAgent = ua.Replace("$0", version).Replace("$1", "Android").Replace("$2", "0")
+            Client.DefaultRequestHeaders.Remove("User-Agent")
+            end sub)
+        return task
+    End function
+    
     public shared function Authorize(username as string, password as String, institutecode as String) as Task
         dim task as task = task.Run(Sub()
             dim nonce as string = GenerateNonce()
@@ -69,6 +87,7 @@ Public MustInherit Class DataResolver
             Client.DefaultRequestHeaders.Add("X-Authorizationpolicy-Key", policyKey)
             Client.DefaultRequestHeaders.add("X-Authorizationpolicy-Version", "v2")
             Client.DefaultRequestHeaders.Add("X-Authorizationpolicy-Nonce", nonce)
+            Client.DefaultRequestHeaders.Add("User-Agent", UserAgent.ToString())
             dim url as string =
                     FuckMyBytes.UnFuckString(
                         "FuyGEO+Eyt8KeiSGFHwRRw21JVqCqBs6DATYiW7sUGPkPXY73wVliS/tJKIU5Dmj2CJFH2bl66oRsbc/XWAVdovVFysY1Kibk+vsoGA5fr06PRACFYSJw7ywJ7hTEq7j6s0WPsoMuPkVsWp1WcF3gdP2b1FK+Ysmsq/wlF6k13/oB/iweN6bqKcrsPqxXx7wVxHt24oHqHYhWC+bAUtPUFNiiZdebydBFOXNbPtz/vIZllUv7eWIJnIZodx3mqm4DHg9cEWVvXo6kLhFWWMkM/G4jzaEdvYdR00piXOAa9BcsP5/H/F7h5DuD3jRp0Du0guovHp6rgV2mw5JKOq07eaXsBk/o0A+0sQaNK/eLeP/3vSL0obcN42mtJXawnXLgKuZgIyTw1gklRM0GCXOYM8/bn9LTUGtX5uGn2oJe++GM3u9GDFCCExklCBvExSqJwFt5TasHfdcASu+kOjktQCCroXYlTlYur3Dr/Z70pb/LuCokrFwBdCgNYLk2w0xNcTmPhvaVmSBcfS7vWtQnl+o8tFB+mJmmoPzSf41lQ7cOfRCztr1Oysve3KblDB2gJQJWijXLKA=")
@@ -89,6 +108,7 @@ Public MustInherit Class DataResolver
             Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Key")
             Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Nonce")
             Client.DefaultRequestHeaders.Remove("X-Authorizationpolicy-Version")
+            Client.DefaultRequestHeaders.Remove("User-Agent")
             if response.IsSuccessStatusCode Then
                 dim content as string = response.Content.ReadAsStringAsync().Result
                 dim json as JObject = JObject.Parse(content)
@@ -109,10 +129,12 @@ Public MustInherit Class DataResolver
 
     private shared function GenerateNonce() as String
         Client.DefaultRequestHeaders.Remove("User-Agent")
+        Client.DefaultRequestHeaders.Add("User-Agent", UserAgent.ToString())
         dim url as string =
                 FuckMyBytes.UnFuckString(
                     "FuyGEO+Eyt8KeiSGFHwRR9hrRFab8x4QBjpUOlt/KsAjdhmYzQnsO3BmRDwrp7yRH9MPrsaRds/yWuZf8TWoobqJXOiG0LKWdh0XXxDpli017g64Jc3fyUGe7FsYo8GZHJYIGyEYLSAv3CnFCuutPcqZeAi5zimtUfMoXLxuj0eCPhoQ7cifUYg7E89zyC4V+p0bFmHjtxf7+YyVuIEnbaw3ZMt1P8HvaM9jz2pn1JLUGlX3iSiTVO6QrWE3pZgZTblqsqNJMdAllTEdKQFxmD9Z/z3d8YzNuyfIjQbxar1IvqalnXy0mXneSe7v0u7/dPVMD4sJ/GS9OzOKV0qp5gm4jLx9oDQVf/yEUKr9Hf7rEpUe+rneS1S2GpWFLasSNua9P6AvVczc7SvXLFS6Paeliqbh9HpABdgNH9rTR8cjVT+Vda4+wMY56yQ8kLKEHQuNXgzM7XuV4yJH+Whu0aPNzfhbM+UbgMznK6d/9Adnf8H2FZIDezyeKOMXbp7jH57dW5n2o5c=")
         dim response as HttpResponseMessage = client.GetAsync(url).Result
+        Client.DefaultRequestHeaders.Remove("User-Agent")
         if response.IsSuccessStatusCode Then
             return response.Content.ReadAsStringAsync().Result
         Else
