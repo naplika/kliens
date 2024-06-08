@@ -65,7 +65,10 @@ Friend MustInherit Class SharedElements
 
         Dim output As String = process.StandardOutput.ReadToEnd()
         process.WaitForExit()
-
+        if output.Length = 0 Then
+            output = "none"
+        End If
+        
         Return output.Trim()
     End Function
 

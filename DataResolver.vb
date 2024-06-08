@@ -155,4 +155,12 @@ Public MustInherit Class DataResolver
             return Convert.toBase64String(computedHash)
         End Using
     End function
+    
+    public shared function Refresh() as Task
+        dim task as task = task.Run(Sub()
+            'dim json as JObject = JObject.Parse(DecryptAuth)
+            
+            end sub)
+        return task
+    End function
 End Class
