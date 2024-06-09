@@ -29,6 +29,8 @@ Public MustInherit Class Commandparser
                         Environment.Exit(0)
                     elseif args.Length = 3 AndAlso args(1) = "fuckstring" Then
                         Console.WriteLine(FuckMyBytes.FuckString(args(2)))
+                    elseif args.Length = 3 AndAlso args(1) = "unfuckstring" Then
+                        Console.WriteLine(FuckMyBytes.UnFuckString(args(2)))
                     elseif args.Length >= 2 AndAlso args(1) = "decryptauth" Then
                         IO.File.WriteAllText(SharedElements.GetStartupPath() + "authorization.dec.json", DecryptAuth)
                         Console.WriteLine("Authorisation dump decrypted.")
