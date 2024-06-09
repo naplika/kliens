@@ -21,7 +21,6 @@ Module Program
         FirstStartupCheck().Wait()
         lang = GetSettings("language")
         DataResolver.GetUserAgent().Wait()
-        DataResolver.Refresh().Wait()
         Console.TreatControlCAsInput = true
         Console.Clear()
         Console.WriteLine(GetTranslation("welcome", Lang))
@@ -42,6 +41,7 @@ Module Program
                     End If
                 End While
             End If
+            DataResolver.Refresh().Wait()
         End If
         extends.ExMain.InitExtensions()
         CommandLineEssentials.Base.CommandMode()

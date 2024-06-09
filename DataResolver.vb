@@ -1,3 +1,4 @@
+Imports System.IO
 Imports System.Net.Http
 imports kliens.SharedElements
 imports Newtonsoft.Json.Linq
@@ -148,8 +149,34 @@ Public MustInherit Class DataResolver
     
     public shared function Refresh() as Task
         dim task as task = task.Run(Sub()
-            'dim json as JObject = JObject.Parse(DecryptAuth)
-            
+            if File.Exists(Loginpath) Then
+                dim json as JObject = JObject.Parse(DecryptAuth)
+                dim refreshToken as string = json("refresh").ToString()
+                dim instituteCode as string = GetSettings("school")
+                dim clientid as string = "kreta-ellenorzo-mobile-android"
+                dim granttype as string = "refresh_token"
+                Client.DefaultRequestHeaders.Add("User-Agent", UserAgent.ToString())
+                dim url as string = "https://idp.e-kreta.hu/connect/token"
+                dim response as HttpResponseMessage =
+                        client.PostAsync(url, New FormUrlEncodedContent(New Dictionary(Of String, String) From {
+                                                                           {"institute_code", institutecode},
+                                                                           {"refresh_token", refreshToken},
+                                                                           {"grant_type", granttype},
+                                                                           {"client_id", clientid}
+                                                                           })).Result
+                client.DefaultRequestHeaders.Remove("User-Agent")
+                if response.IsSuccessStatusCode Then
+                    dim content as string = response.Content.ReadAsStringAsync().Result
+                    dim json2 as JObject = JObject.Parse(content)
+                    dim token as string = json2("access_token").ToString()
+                    dim tokenparts as String() = token.Split(".")
+                    dim signature as string = BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", "")
+                    dim username as string = GetSettings("user")
+                    SaveLogin(content, signature, username, institutecode)
+                Else 
+                    Console.WriteLine("Failed to refresh login, " + response.StatusCode.ToString())
+                End If
+            End If
             end sub)
         return task
     End function
