@@ -17,11 +17,11 @@ Public MustInherit Class DataResolver
                 if SharedElements.checkinternetconnection = true Then
                     cacheSchools().Wait()
                 Else
-                    Console.WriteLine(GetTranslation("nointernet", lang))
+                    Console.WriteLine(GetTranslation("no.internet", lang))
                 End If
                 schooldata = io.File.ReadAllText(Schoolspath)
             Else
-                Console.WriteLine(GetTranslation("filecached", lang).Replace("%s", GetCacheTime(Schoolspath).ToString()))
+                Console.WriteLine(GetTranslation("file.cached", lang).Replace("%s", GetCacheTime(Schoolspath).ToString()))
                 schooldata = io.File.ReadAllText(Schoolspath)
             End If
             dim schools as JArray = JArray.Parse(schooldata)
@@ -32,14 +32,14 @@ Public MustInherit Class DataResolver
                 dim name as string = school("name").ToString()
                 if FuzzySearch(query, instituteCode) > 90 or FuzzySearch(query, name) > 90 Then
                     hitnum += 1
-                    hits += vbcrlf + GetTranslation("searchhit", lang).Replace("%s", hitnum.ToString()) + vbcrlf + name +
+                    hits += vbcrlf + GetTranslation("search.hit", lang).Replace("%s", hitnum.ToString()) + vbcrlf + name +
                             vbcrlf + instituteCode + " (" + school("city").ToString() + ")"
                 End If
             Next
             Console.WriteLine(hits)
             if hitnum > 1 then
-                Console.WriteLine(GetTranslation("morethan1school", lang).Replace("%s", hitnum.ToString()))
-                Console.WriteLine(GetTranslation("bespecific", lang))
+                Console.WriteLine(GetTranslation("more.than.1.school", lang).Replace("%s", hitnum.ToString()))
+                Console.WriteLine(GetTranslation("be.specific", lang))
             End If
         end sub)
         return task
@@ -55,7 +55,7 @@ Public MustInherit Class DataResolver
                 dim content as string = response.Content.ReadAsStringAsync().Result
                 System.IO.File.WriteAllText(Schoolspath, content)
             Else
-                Console.WriteLine(GetTranslation("schoolgetfailed", Lang).Replace("%s", response.StatusCode.ToString()))
+                Console.WriteLine(GetTranslation("school.get.failed", Lang).Replace("%s", response.StatusCode.ToString()))
             End If
         end sub)
         return task
@@ -113,7 +113,7 @@ Public MustInherit Class DataResolver
                 Console.WriteLine("Authorization Signature: " + FuckMyBytes.LengthController(signature, 5))
                 dim payload as JObject =
                         JObject.Parse(System.Text.Encoding.UTF8.GetString(SharedElements.Base64UrlDecode(tokenparts(1))))
-                Console.WriteLine(GetTranslation("hellouser", Lang).Replace("%s", payload("name").ToString()))
+                Console.WriteLine(GetTranslation("hello.user", Lang).Replace("%s", payload("name").ToString()))
                 SaveLogin(content, signature, password, username, institutecode)
             Else
                 Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())

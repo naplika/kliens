@@ -14,7 +14,7 @@ Public MustInherit Class Commandparser
                 elseif args(0) = "schools" Then
                     if args.Length < 2 Then
                         Console.ForegroundColor = ConsoleColor.Red
-                        Console.WriteLine(SharedElements.GetTranslation("schoolscmd", lang))
+                        Console.WriteLine(SharedElements.GetTranslation("schools.cmd", lang))
                         Exit Sub
                     End If
                     searchschool(args(1)).Wait()
@@ -43,10 +43,12 @@ Public MustInherit Class Commandparser
 
                     End If
                 elseif args(0) = "login" Then
-                    if args.Length < 4 Then
-                        Console.WriteLine("login <username> <password> <institutecode>")
+                    if args.Length < 3 Then
+                        Console.WriteLine("login <username> <institutecode>")
                     Else
-                        DataResolver.Authorize(args(1), args(2), args(3)).Wait()
+                        Console.WriteLine(SharedElements.GetTranslation("enter.password", Lang))
+                        Dim password As String = SharedElements.ReadPassword()
+                        DataResolver.Authorize(args(1), password, args(2)).Wait()
                     End If
                 elseif args(0) = "logout" Then
                     if args.Length < 2 Then
@@ -56,7 +58,7 @@ Public MustInherit Class Commandparser
                     End If
                 Else
                     Console.ForegroundColor = ConsoleColor.Red
-                    Console.WriteLine(SharedElements.GetTranslation("cmdnotfound", Lang))
+                    Console.WriteLine(SharedElements.GetTranslation("cmd.not.found", Lang))
 
                 End If
             End If
@@ -64,6 +66,8 @@ Public MustInherit Class Commandparser
         return task
     End Function
 
+
+    
     private Shared function cmd_exit()
         Console.ForegroundColor = ConsoleColor.Gray
         Environment.Exit(0)

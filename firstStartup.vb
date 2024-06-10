@@ -36,7 +36,7 @@ Public Module FirstStartup
                 dim jsonstring as string = jsonobj.ToString()
                 dim output as STRING = FuckMyBytes.FuckString(jsonstring, Program.Uniquepass)
                 File.WriteAllText(Settingspath, output)
-                Console.WriteLine(GetTranslation("changessaved", templang))
+                Console.WriteLine(GetTranslation("changes.saved", templang))
             End If
             Environment.Exit(0)
         end sub)

@@ -26,7 +26,7 @@ Module Program
         Console.WriteLine(GetTranslation("welcome", Lang))
         if SharedElements.CheckInternetConnection() = false Then
             _internetavail = False
-            Console.WriteLine(GetTranslation("nointernet", Lang))
+            Console.WriteLine(GetTranslation("no.internet", Lang))
         End If
         if _internetavail = true Then
             dim updatecheck = updateChecker()
@@ -52,7 +52,7 @@ Module Program
             if File.Exists(Settingspath) Then
                 dim jsonString = ""
                 if DecryptConf = "fail" or DecryptConf = nothing Then
-                    Console.WriteLine(GetTranslation("unencryptedconfig", lang))
+                    Console.WriteLine(GetTranslation("unencrypted.config", lang))
                     upgradeconfig()
                     Environment.Exit(0)
                 Else
@@ -81,7 +81,7 @@ Module Program
             dim jsonobject as jobject = JObject.Parse(jsonstring)
             return jsonobject(q).ToString()
         catch ex as Exception
-            Console.WriteLine(GetTranslation("settingloadfailed", lang).Replace("%s", q))
+            Console.WriteLine(GetTranslation("setting.load.failed", lang).Replace("%s", q))
             return False
         end try
     End function

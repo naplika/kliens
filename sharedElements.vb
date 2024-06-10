@@ -34,22 +34,34 @@ Friend MustInherit Class SharedElements
         End If
     End function
 
-    public shared function GetTranslation(query as string, lang as string) as String
-        Dim originalCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture
-        if lang isnot Nothing Then
-            System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
-        Else
-            System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
-        End If
+public shared function GetTranslation(query as string, lang as string) as String
+    Dim originalCulture As System.Globalization.CultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture
+    if lang isnot Nothing Then
+        System.Threading.Thread.CurrentThread.CurrentUICulture = New System.Globalization.CultureInfo(lang)
+    Else
+        System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
+    End If
 
-        Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
-        Dim result As String = rm.GetString(query)
-        if result.Length <= 0 Then
-            System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
-            result = rm.GetString(query)
+    Dim rm As New ResourceManager("kliens.i18n", Assembly.GetExecutingAssembly())
+    Dim result As String
+    Try
+        result = rm.GetString(query)
+        if result Is Nothing OrElse result.Length <= 0 Then
+            Throw New Exception("Entry not found")
         End If
-        return result
-    End function
+    Catch ex As Exception
+        System.Threading.Thread.CurrentThread.CurrentUICulture = originalCulture
+        Try
+            result = rm.GetString(query)
+            If result Is Nothing OrElse result.Length <= 0 Then
+                result = query
+            End If
+        Catch ex2 As Exception
+            result = query
+        End Try
+    End Try
+    return result
+End function
 
     Public shared Function RunBashCommand(command As String) As String
         Dim processStartInfo As New ProcessStartInfo() With {
@@ -149,7 +161,7 @@ Friend MustInherit Class SharedElements
     End Function
 
     public shared function Help()
-        Console.WriteLine(GetTranslation("helpheader", Lang))
+        Console.WriteLine(GetTranslation("help.header", Lang))
         Console.WriteLine()
         Console.WriteLine("clear/cls : " + GetTranslation("help-clear", Lang))
         Console.WriteLine("schools <name/institute code> : " + GetTranslation("help-schools", Lang))
@@ -172,11 +184,11 @@ Friend MustInherit Class SharedElements
                 return False
             Else
                 if localversion < json("version").ToString() Then
-                    Console.WriteLine(GetTranslation("updateavaiable", lang))
+                    Console.WriteLine(GetTranslation("update.avaiable", lang))
                     Console.Writeline("Current: " + localversion)
                     Console.WriteLine("New: " + json("version").ToString())
                 elseif localversion > json("version").ToString() Then
-                    Console.WriteLine(GetTranslation("localversionnewer", Lang))
+                    Console.WriteLine(GetTranslation("local.version.newer", Lang))
                     Console.Writeline("Current: " + localversion)
                     Console.WriteLine("New: " + json("version").ToString())
                 End If
@@ -262,5 +274,27 @@ Friend MustInherit Class SharedElements
     Private Shared Function ToUnixTimestamp(dateTime As DateTime) As Long
         Dim dateTimeOffset = new DateTimeOffset(dateTime)
         Return dateTimeOffset.ToUnixTimeSeconds()
+    End Function
+    
+    public shared Function ReadPassword() As String
+        Dim password As New System.Text.StringBuilder()
+        While True
+            Dim info As ConsoleKeyInfo = Console.ReadKey(True)
+            If info.Key = ConsoleKey.Enter Then
+                Console.WriteLine()
+                Exit While
+            ElseIf info.Key = ConsoleKey.Backspace Then
+                If password.Length > 0 Then
+                    password.Remove(password.Length - 1, 1)
+                    Console.Write(vbBack)
+                    Console.Write(" ")
+                    Console.Write(vbBack)
+                End If
+            Else
+                password.Append(info.KeyChar)
+                Console.Write("*")
+            End If
+        End While
+        Return password.ToString()
     End Function
 End Class

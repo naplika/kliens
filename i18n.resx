@@ -18,55 +18,55 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="helloworld" xml:space="preserve">
+    <data name="hello.world" xml:space="preserve">
         <value>Hello World!</value>
     </data>
-    <data name="changessaved" xml:space="preserve">
+    <data name="changes.saved" xml:space="preserve">
         <value>Settings saved.</value>
     </data>
     <data name="welcome" xml:space="preserve">
         <value>Welcome to Naplika!</value>
     </data>
-    <data name="cmdnotfound" xml:space="preserve">
+    <data name="cmd.not.found" xml:space="preserve">
         <value>Command not found. (Try help)</value>
     </data>
-    <data name="filecached" xml:space="preserve">
+    <data name="file.cached" xml:space="preserve">
         <value>There was already a cached version that was updated %s of minutes ago.</value>
     </data>
-    <data name="searchhit" xml:space="preserve">
+    <data name="search.hit" xml:space="preserve">
         <value>Hit %s</value>
     </data>
-    <data name="morethan1school" xml:space="preserve">
+    <data name="more.than.1.school" xml:space="preserve">
         <value>The command found more than 1 school (%s).</value>
     </data>
-    <data name="bespecific" xml:space="preserve">
+    <data name="be.specific" xml:space="preserve">
         <value>If possible, be a little more specific with the name.</value>
     </data>
-    <data name="unencryptedconfig" xml:space="preserve">
+    <data name="unencrypted.config" xml:space="preserve">
         <value>You are using the old unencrypted config, encrypting now...</value>
     </data>
-    <data name="settingloadfailed" xml:space="preserve">
+    <data name="setting.load.failed" xml:space="preserve">
         <value>failed to retrieve %s from config</value>
     </data>
-    <data name="schoolgetfailed" xml:space="preserve">
+    <data name="school.get.failed" xml:space="preserve">
         <value>Couldn't download the school list from reFilc... %s</value>
     </data>
-    <data name="nointernet" xml:space="preserve">
+    <data name="no.internet" xml:space="preserve">
         <value>Internet not available, current data may be out of date.</value>
     </data>
-    <data name="schoolscmd" xml:space="preserve">
+    <data name="schools.cmd" xml:space="preserve">
         <value>schools &lt;school name or institute code&gt;</value>
     </data>
-    <data name="updateavaiable" xml:space="preserve">
+    <data name="update.avaiable" xml:space="preserve">
         <value>A new update is avaiable, please update for the best experience.</value>
     </data>
-    <data name="localversionnewer" xml:space="preserve">
+    <data name="local.version.newer" xml:space="preserve">
         <value>Your version is newer than the official.</value>
     </data>
     <data name="help-clear" xml:space="preserve">
         <value>Clear screen</value>
     </data>
-    <data name="helpheader" xml:space="preserve">
+    <data name="help.header" xml:space="preserve">
         <value>Help</value>
     </data>
     <data name="help-schools" xml:space="preserve">
@@ -81,7 +81,7 @@
     <data name="help-config" xml:space="preserve">
         <value>Edit the settings.json file</value>
     </data>
-    <data name="hellouser" xml:space="preserve">
+    <data name="hello.user" xml:space="preserve">
         <value>Hello, %s!</value>
     </data>
 </root>
