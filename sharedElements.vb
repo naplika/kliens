@@ -219,7 +219,7 @@ Friend MustInherit Class SharedElements
         Return (s.Length Mod 4 = 0) AndAlso Regex.IsMatch(s, "^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None)
     End Function
 
-    public shared function SaveLogin(response as String, signature as String, optional name as string = "guest",
+    public shared function SaveLogin(response as String, signature as String, password as String, optional name as string = "guest",
                                      optional school as string = "Naplika")
         dim jsonobj = new JsonObject()
         dim json as JObject = JObject.Parse(response)
@@ -238,6 +238,8 @@ Friend MustInherit Class SharedElements
         dim confjson as JObject = JObject.Parse(DecryptConf)
         confjson("user") = name
         confjson("school") = school
+        ' if you ask it is for reauthenticating in case kreten refresh token expires
+        confjson("password") = password
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)

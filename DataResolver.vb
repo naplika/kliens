@@ -114,7 +114,7 @@ Public MustInherit Class DataResolver
                 dim payload as JObject =
                         JObject.Parse(System.Text.Encoding.UTF8.GetString(SharedElements.Base64UrlDecode(tokenparts(1))))
                 Console.WriteLine(GetTranslation("hellouser", Lang).Replace("%s", payload("name").ToString()))
-                SaveLogin(content, signature, username, institutecode)
+                SaveLogin(content, signature, password, username, institutecode)
             Else
                 Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())
             End If
@@ -172,9 +172,12 @@ Public MustInherit Class DataResolver
                     dim tokenparts as String() = token.Split(".")
                     dim signature as string = BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", "")
                     dim username as string = GetSettings("user")
-                    SaveLogin(content, signature, username, institutecode)
+                    dim password as string = GetSettings("password")
+                    SaveLogin(content, signature, password, username, instituteCode)
                 Else 
-                    Console.WriteLine("Failed to refresh login, " + response.StatusCode.ToString())
+                    dim username as string = GetSettings("user")
+                    dim password as string = GetSettings("password")
+                    Authorize(username, password, instituteCode).Wait()
                 End If
             End If
             end sub)
