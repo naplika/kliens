@@ -407,3 +407,5 @@ riderModule.iml
 /.idea/.idea.kliens/.idea/discord.xml
 /.idea/.idea.kliens/.idea/git_toolbox_prj.xml
 /naplika.snk
+/build/
+build/*

@@ -1,80 +1,93 @@
 Imports System
 Imports System.IO
-Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
+Imports System.Threading
+imports Mindmagma.Curses
+
+#Disable Warning BC42016
+
 Module Program
-    Public ReadOnly Lang as string = GetSettings("language")
-    public Debugflag as Boolean = false 
-    public Uniquepass as string
-    Sub Main(args As String())
-        if args.Length > 0 Then
-            for each arg as string in args
-                if arg.ToLower().Equals("-debug") Then
-                    Debugflag = true
-                End If
-            Next
-        End If
+    public Updatedconfig as boolean = False
+    public readonly Uniquepass as string = SecurityMeasurements.GenUniquePass()
+    public Lang as String
+    public DecryptConf as string
+    public DecryptAuth as string
+    private _internetavail as Boolean = true
+    public Screen = NCurses.InitScreen()
+    
+    Sub Main()
+        NCurses.NoDelay(Screen, True)
+        NCurses.NoEcho()
+        NCurses.Refresh()
+        DecryptConf = SecurityMeasurements.decryptconfig()
+        DecryptAuth = SecurityMeasurements.DecryptAuth()
+        FirstStartupCheck().Wait()
+        lang = GetSettings("language")
+        DataResolver.GetUserAgent().Wait()
         Console.TreatControlCAsInput = true
         Console.Clear()
-        Uniquepass = SecurityMeasurements.GenUniquePass()
-        firstStartupCheck()
         Console.WriteLine(GetTranslation("welcome", Lang))
-        Commandmode()
+        if SharedElements.CheckInternetConnection() = false Then
+            _internetavail = False
+            Console.WriteLine(GetTranslation("no.internet", Lang))
+        End If
+        if _internetavail = true Then
+            dim updatecheck = updateChecker()
+            if updateCheck = false Then
+                dim fails = 0
+                while updatecheck = false
+                    Thread.Sleep(3000)
+                    updatecheck = updateChecker()
+                    fails += 1
+                    if fails = 5 Then
+                        Exit While
+                    End If
+                End While
+            End If
+            DataResolver.Refresh().Wait()
+        End If
+        extends.ExMain.InitExtensions()
+        CommandLineEssentials.Base.CommandMode()
     End Sub
 
-    Private function FirstStartupCheck()
-        if File.Exists(Settingspath) Then
-            dim jsonString as string = file.ReadAllText(Settingspath)
-            dim jsonObject as JObject = JObject.Parse(jsonString)
-            if not jsonObject.ContainsKey("firstStartup") Then
-                firstStartup.welcome()
-            End If
-        Else
-            firstStartup.welcome()
-        End If
-        return True
-    End function
-
-    private function GetSettings(q as string) as String
-        dim jsonstring as string = file.ReadAllText(Settingspath)
-        dim jsonobject as jobject = JObject.Parse(jsonstring)
-        return jsonobject(q).ToString()
-    End function
-
-    private sub Commandmode()
-        dim username as string = GetSettings("user")
-        dim school as string = GetSettings("school")
-        Console.ForegroundColor = consolecolor.Gray
-        Console.Write("{0}@{1}> ", username, school)
-        dim command as new StringBuilder
-        console.ForegroundColor = ConsoleColor.Yellow
-        While True
-            Dim keyInfo As ConsoleKeyInfo = Console.ReadKey(True)
-            If keyInfo.Key = ConsoleKey.Enter Then
-                console.WriteLine()
-                dim commandarray as string() = command.ToString().Split(" ")
-                Commandparser.Parsecommand(commandarray)
-                command.Clear()
-                Commandmode()
-            elseIf keyInfo.Key = ConsoleKey.C AndAlso keyInfo.Modifiers = ConsoleModifiers.Control Then
-                Console.ForegroundColor = ConsoleColor.Gray
-                Console.WriteLine()
-                Environment.Exit(0)
-            ElseIf keyInfo.Key = ConsoleKey.Backspace Then
-                If command.Length > 0 Then
-                    command.Remove(command.Length - 1, 1)
-                    Console.Write(vbBack)
-                    Console.Write(" ")
-                    Console.Write(vbBack)
-                    Else 
-                        Console.Beep()
+    Private function FirstStartupCheck() as task
+        dim task as task = task.Run(Sub()
+            if File.Exists(Settingspath) Then
+                dim jsonString = ""
+                if DecryptConf = "fail" or DecryptConf = nothing Then
+                    Console.WriteLine(GetTranslation("unencrypted.config", lang))
+                    upgradeconfig()
+                    Environment.Exit(0)
+                Else
+                    jsonString = DecryptConf
                 End If
-                Continue While
+                dim jsonObject as JObject = JObject.Parse(jsonString)
+                if not jsonObject.ContainsKey("firstStartup") Then
+                    firstStartup.welcome().Wait()
+                End If
+            Else
+                firstStartup.welcome().Wait()
+
             End If
-            command.Append(keyInfo.KeyChar)
-            Console.Write(keyInfo.KeyChar)
-        End While
-    End sub
+        end sub)
+        return task
+    End function
+
+    public function GetSettings(q as string) as String
+        dim jsonstring as string
+        if DecryptConf = "fail" Then
+            jsonstring = File.ReadAllText(Settingspath)
+        Else
+            jsonstring = DecryptConf
+        End If
+        try
+            dim jsonobject as jobject = JObject.Parse(jsonstring)
+            return jsonobject(q).ToString()
+        catch ex as Exception
+            Console.WriteLine(GetTranslation("setting.load.failed", lang).Replace("%s", q))
+            return False
+        end try
+    End function
 End Module

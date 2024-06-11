@@ -14,10 +14,27 @@
         <AssemblyOriginatorKeyFile>main.snk</AssemblyOriginatorKeyFile>
         <PublicSign>true</PublicSign>
         <ApplicationIcon>N.ico</ApplicationIcon>
+        <NoWarn>BC41997</NoWarn>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugType>full</DebugType>
+      <DocumentationFile>bin\Debug\net8.0\kliens.xml</DocumentationFile>
+      <Prefer32bit>false</Prefer32bit>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+      <Prefer32bit>false</Prefer32bit>
+      <DebugType>none</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="BouncyCastle.Cryptography" Version="2.3.0" />
+      <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+      <PackageReference Include="dotnet-curses" Version="1.0.3" />
+      <PackageReference Include="FuzzySharp" Version="2.0.2" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
@@ -31,6 +48,13 @@
       <None Remove="N.ico" />
       <None Remove="crowdin.yml" />
       <None Remove="kliens.sln.DotSettings" />
+      <None Remove="build\osx-x64.zip" />
+      <None Remove="build\win-x64.zip" />
+        <None Remove="build\linux-x64.zip" />
+        <None Update="InsultGen\dirtywords.xml">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <Compile Remove="CommandLineEssentials\commandlineEssentials.vb" />
     </ItemGroup>
 
     <ItemGroup>

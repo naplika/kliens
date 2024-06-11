@@ -1,0 +1,23 @@
+#-------------------------------------------------------------------------------#
+#               Qodana analysis is configured by qodana.yaml file               #
+#             https://www.jetbrains.com/help/qodana/qodana-yaml.html            #
+#-------------------------------------------------------------------------------#
+version: "1.0"
+
+ide: QDNET
+linter: jetbrains/qodana-cdnet:2024.1
+
+profile:
+  name: qodana.starter
+
+exclude:
+  - name: OverriddenWithSameValue
+    paths:
+      - i18n.en.resx
+  - name: NotOverriddenInSpecificCulture
+    paths:
+      - i18n.resx
+  - name: LocalizableElement
+  - name: CA1850
+    paths:
+      - FuckMyBytes/encryptionproviders.vb
