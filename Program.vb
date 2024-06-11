@@ -4,6 +4,7 @@ imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
 Imports System.Threading
+imports Mindmagma.Curses
 
 #Disable Warning BC42016
 
@@ -14,8 +15,12 @@ Module Program
     public DecryptConf as string
     public DecryptAuth as string
     private _internetavail as Boolean = true
-
+    public Screen = NCurses.InitScreen()
+    
     Sub Main()
+        NCurses.NoDelay(Screen, True)
+        NCurses.NoEcho()
+        NCurses.Refresh()
         DecryptConf = SecurityMeasurements.decryptconfig()
         DecryptAuth = SecurityMeasurements.DecryptAuth()
         FirstStartupCheck().Wait()
