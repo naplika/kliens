@@ -82,6 +82,6 @@
         <value>A settings.json fájl szerkesztése</value>
     </data>
     <data name="hello.user" xml:space="preserve">
-        <value>Hello, %s!</value>
+        <value>Üdv, %s!</value>
     </data>
 </root>

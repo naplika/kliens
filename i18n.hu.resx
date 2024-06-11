@@ -181,6 +181,6 @@
     <value>A settings.json fájl szerkesztése</value>
   </data>
   <data name="hello.user">
-    <value>Hello, %s!</value>
+    <value>Üdv, %s!</value>
   </data>
 </root>
