@@ -117,56 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="helloworld">
-    <value>Üdv Világ!</value>
+  <data name="hello.world">
+    <value>Hello World!</value>
   </data>
-  <data name="changessaved">
-    <value>Beállítások mentve.</value>
+  <data name="changes.saved">
+    <value>Settings saved.</value>
   </data>
   <data name="welcome">
     <value>Üdv a Naplikában!</value>
   </data>
-  <data name="cmdnotfound">
-    <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
+  <data name="cmd.not.found">
+    <value>Command not found. (Try help)</value>
   </data>
-  <data name="filecached">
-    <value>Már volt egy gyorsítótárazott verzió, ami %s perce lett frissítve.</value>
+  <data name="file.cached">
+    <value>There was already a cached version that was updated %s of minutes ago.</value>
   </data>
-  <data name="searchhit">
-    <value>%s. Találat</value>
+  <data name="search.hit">
+    <value>Hit %s</value>
   </data>
-  <data name="morethan1school">
-    <value>A parancs 1-nél több iskolát talált (%s).</value>
+  <data name="more.than.1.school">
+    <value>The command found more than 1 school (%s).</value>
   </data>
-  <data name="bespecific">
-    <value>Ha lehet, legyél egy kicsit specifikusabb a névvel.</value>
+  <data name="be.specific">
+    <value>If possible, be a little more specific with the name.</value>
   </data>
-  <data name="unencryptedconfig">
-    <value>A régi, titkosítatlan konfigurációt használod, titkosítás...</value>
+  <data name="unencrypted.config">
+    <value>You are using the old unencrypted config, encrypting now...</value>
   </data>
-  <data name="settingloadfailed">
-    <value>nem sikerült lekérdezni %s-t a configból</value>
+  <data name="setting.load.failed">
+    <value>failed to retrieve %s from config</value>
   </data>
-  <data name="schoolgetfailed">
-    <value>Nem sikerült letölteni az iskolák listáját a reFilc-ből... %s</value>
+  <data name="school.get.failed">
+    <value>Couldn't download the school list from reFilc... %s</value>
   </data>
-  <data name="nointernet">
-    <value>Internet nem elérhető, az aktuális adatok elavultak lehetnek.</value>
+  <data name="no.internet">
+    <value>Internet not available, current data may be out of date.</value>
   </data>
-  <data name="schoolscmd">
-    <value>iskolák &amp;lt;school name or institute code&amp;gt;</value>
+  <data name="schools.cmd">
+    <value>schools &amp;lt;school name or institute code&amp;gt;</value>
   </data>
-  <data name="updateavaiable">
-    <value>Új frissítés érhető el, frissíts a legjobb élmény érdekében.</value>
+  <data name="update.avaiable">
+    <value>A new update is avaiable, please update for the best experience.</value>
   </data>
-  <data name="localversionnewer">
-    <value>A te verziód újabb, mint a hivatalos.</value>
+  <data name="local.version.newer">
+    <value>Your version is newer than the official.</value>
   </data>
   <data name="help-clear">
     <value>Kijelző letörlése</value>
   </data>
-  <data name="helpheader">
-    <value>Súgó</value>
+  <data name="help.header">
+    <value>Help</value>
   </data>
   <data name="help-schools">
     <value>Iskolák keresése</value>
@@ -179,5 +179,8 @@
   </data>
   <data name="help-config">
     <value>A settings.json fájl szerkesztése</value>
+  </data>
+  <data name="hello.user">
+    <value>Hello, %s!</value>
   </data>
 </root>
