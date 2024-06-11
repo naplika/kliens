@@ -154,10 +154,10 @@
     <value>Internet not available, current data may be out of date.</value>
   </data>
   <data name="schools.cmd">
-    <value>schools &amp;lt;school name or institute code&amp;gt;</value>
+    <value>schools &lt;school name or institute code&gt;</value>
   </data>
   <data name="update.avaiable">
-    <value>A new update is avaiable, please update for the best experience.</value>
+    <value>A new update is available, please update for the best experience.</value>
   </data>
   <data name="local.version.newer">
     <value>Your version is newer than the official.</value>
