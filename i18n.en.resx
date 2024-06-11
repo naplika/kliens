@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="hello.world">
-    <value>Üdv Világ!</value>
+    <value>Hello World!</value>
   </data>
   <data name="changes.saved">
-    <value>Beállítások mentve.</value>
+    <value>Settings saved.</value>
   </data>
   <data name="welcome">
     <value>Welcome to Naplika!</value>
   </data>
   <data name="cmd.not.found">
-    <value>Parancs nem található. (Nézd meg a segédletet: help)</value>
+    <value>Command not found. (Try help)</value>
   </data>
   <data name="file.cached">
-    <value>Már volt egy gyorsítótárazott verzió, ami %s perce lett frissítve.</value>
+    <value>There was already a cached version that was updated %s of minutes ago.</value>
   </data>
   <data name="search.hit">
-    <value>%s. Találat</value>
+    <value>Hit %s</value>
   </data>
   <data name="more.than.1.school">
-    <value>A parancs 1-nél több iskolát talált (%s).</value>
+    <value>The command found more than 1 school (%s).</value>
   </data>
   <data name="be.specific">
-    <value>Ha lehet, legyél egy kicsit specifikusabb a névvel.</value>
+    <value>If possible, be a little more specific with the name.</value>
   </data>
   <data name="unencrypted.config">
-    <value>A régi, titkosítatlan konfigurációt használod, titkosítás...</value>
+    <value>You are using the old unencrypted config, encrypting now...</value>
   </data>
   <data name="setting.load.failed">
-    <value>nem sikerült lekérdezni %s-t a configból</value>
+    <value>failed to retrieve %s from config</value>
   </data>
   <data name="school.get.failed">
-    <value>Nem sikerült letölteni az iskolák listáját a reFilc-ből... %s</value>
+    <value>Couldn't download the school list from reFilc... %s</value>
   </data>
   <data name="no.internet">
-    <value>Internet nem elérhető, az aktuális adatok elavultak lehetnek.</value>
+    <value>Internet not available, current data may be out of date.</value>
   </data>
   <data name="schools.cmd">
-    <value>schools &amp;lt;iskola név vagy kód&amp;gt;</value>
+    <value>schools &amp;lt;school name or institute code&amp;gt;</value>
   </data>
   <data name="update.avaiable">
-    <value>Új frissítés érhető el, frissíts a legjobb élmény érdekében.</value>
+    <value>A new update is available, please update for the best experience.</value>
   </data>
   <data name="local.version.newer">
-    <value>A te verziód újabb, mint a hivatalos.</value>
+    <value>Your version is newer than the official.</value>
   </data>
   <data name="help-clear">
     <value>Clear screen</value>
   </data>
   <data name="help.header">
-    <value>Súgó</value>
+    <value>Help</value>
   </data>
   <data name="help-schools">
     <value>Search for schools</value>
