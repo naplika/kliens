@@ -87,9 +87,12 @@ Module Program
             return jsonobject(q).ToString()
         catch ex as Exception
             dim regen as string
-            TryToRegen(q, regen)
-            Console.WriteLine(GetTranslation("setting.load.failed", lang).Replace("%s", q))
-            return False
+            if TryToRegen(q, regen) = True Then
+                return regen
+            Else
+                Console.WriteLine(GetTranslation("setting.load.failed", lang).Replace("%s", q))
+                return False
+            End If
         end try
     End function
     
@@ -115,5 +118,6 @@ Module Program
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)
+        vari = value
     End Function
 End Module
