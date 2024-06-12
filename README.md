@@ -3,7 +3,12 @@
 <h1>Alternatív Kréta kliens parancssorra.</h1>
 
 ![Crowdin](https://badges.crowdin.net/naplika/localized.svg)
-[Segíts fordítani!](https://crowdin.com/project/naplika)
+[Segíts fordítani!](https://crowdin.com/project/naplika)<br>
+<details>
+    <summary>Jelenlegi fordítók listája</summary>
+    - [Zan](https://github.com/Zan1456)
+
+</details>
 
 <hr>
 
@@ -17,12 +22,12 @@ Ez a csodálat teljes mértékben biztonságban tartja adataidat egy egyedi azon
 
 Valami ami gép...<br>
 Elvárások:
-* Vigyen el egy konzolt
-* Legyen internet kapcsolata
-* Elbírja az encryptort (1.9GHz-s gépen tesztelve)
-* x64 (amd64) képes processzor és rendszer
-* minimum 20MiB ram (rendszer nincs bele számítva)
-* .NET 8 (Ha self-buildelsz)
+- Vigyen el egy konzolt
+- Legyen internet kapcsolata
+- Elbírja az encryptort (1.9GHz-s gépen tesztelve)
+- x64 (amd64) képes processzor és rendszer
+- minimum 20MiB ram (rendszer nincs bele számítva)
+- .NET 8 (Ha self-buildelsz)
 
 ## Építés
 
