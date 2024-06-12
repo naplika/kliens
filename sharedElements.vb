@@ -164,10 +164,12 @@ End function
         Console.WriteLine(GetTranslation("help.header", Lang))
         Console.WriteLine()
         Console.WriteLine("clear/cls : " + GetTranslation("help-clear", Lang))
-        Console.WriteLine("schools <name/institute code> : " + GetTranslation("help-schools", Lang))
+        Console.WriteLine(GetTranslation("schools.cmd", Lang) + " : " + GetTranslation("help-schools", Lang))
         Console.WriteLine("help : " + GetTranslation("help-help", Lang))
         Console.WriteLine("insult : " + GetTranslation("help-insult", Lang))
         Console.WriteLine("config : " + GetTranslation("help-config", Lang))
+        Console.WriteLine(GetTranslation("login.cmd", Lang) + " : " + GetTranslation("help-login", Lang))
+        Console.WriteLine("logout : " + GetTranslation("help-logout", Lang))
         return 0
     End function
 
@@ -185,17 +187,17 @@ End function
             Else
                 if localversion < json("version").ToString() Then
                     Console.WriteLine(GetTranslation("update.avaiable", lang))
-                    Console.Writeline("Current: " + localversion)
-                    Console.WriteLine("New: " + json("version").ToString())
+                    Console.Writeline(GetTranslation("update.current", Lang) + localversion)
+                    Console.WriteLine(GetTranslation("update.new", Lang) + json("version").ToString())
                 elseif localversion > json("version").ToString() Then
                     Console.WriteLine(GetTranslation("local.version.newer", Lang))
-                    Console.Writeline("Current: " + localversion)
-                    Console.WriteLine("New: " + json("version").ToString())
+                    Console.Writeline(GetTranslation("update.current", Lang) + localversion)
+                    Console.WriteLine(GetTranslation("update.new", Lang) + json("version").ToString())
                 End If
                 return true
             End If
         Else
-            Console.WriteLine("Update check failed: " + response.StatusCode.ToString())
+            Console.WriteLine(GetTranslation("update.failed", Lang) + response.StatusCode.ToString())
             return false
         End If
     End Function
@@ -209,9 +211,10 @@ End function
     End Function
 
     public shared Function PrintConfigables()
-        Console.WriteLine("Configurable elements")
-        Console.WriteLine("config <entry> <value>")
-        Console.WriteLine("language: " + GetSettings("language"))
+        Console.WriteLine(GetTranslation("config.header", Lang))
+        Console.WriteLine(GetTranslation("config.cmd", Lang))
+        Console.WriteLine("language: " + GetSettings("language") + " # " + GetTranslation("config-language", Lang))
+        Console.WriteLine("customuser: " + GetSettings("customuser") + " # " + GetTranslation("config-customuser", Lang))
         return 0
     End Function
 
@@ -252,6 +255,7 @@ End function
         confjson("school") = school
         ' if you ask it is for reauthenticating in case kreten refresh token expires
         confjson("password") = password
+        confjson("customuser") = name
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)
@@ -263,6 +267,8 @@ End function
         dim json as JObject = JObject.Parse(DecryptConf)
         json("user") = "guest"
         json("school") = "Naplika"
+        json("customuser") = "guest"
+        json("password") = "undefined"
         dim jstring as string = json.ToString()
         jstring = FuckMyBytes.FuckString(jstring, program.Uniquepass)
         File.WriteAllText(Settingspath, jstring)

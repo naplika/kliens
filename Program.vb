@@ -86,8 +86,34 @@ Module Program
             dim jsonobject as jobject = JObject.Parse(jsonstring)
             return jsonobject(q).ToString()
         catch ex as Exception
+            dim regen as string
+            TryToRegen(q, regen)
             Console.WriteLine(GetTranslation("setting.load.failed", lang).Replace("%s", q))
             return False
         end try
     End function
+    
+    public Function TryToRegen(q as String, byref vari as String) As Boolean
+        dim confjson as JObject = JObject.Parse(DecryptConf)
+        dim value as String
+        if q = "language" Then
+            value = "en"
+        elseif q = "customuser" Then
+            value = "guest"
+        elseif q = "user" Then
+            value = "guest"
+        ElseIf q = "school" Then
+            value = "Naplika"
+        elseif q = "firstStartup" Then
+            value = "false"
+        elseif q = "configrev" Then
+            value = "1"
+        elseif q = "password" Then
+            value = "undefined"
+        End If
+        confjson(q) = value
+        dim updconf as string = confjson.ToString()
+        updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
+        File.WriteAllText(Settingspath, updconf)
+    End Function
 End Module

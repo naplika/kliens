@@ -10,11 +10,13 @@ Public Module FirstStartup
             Console.WriteLine("1. Hungarian")
             Console.WriteLine("2. English")
             Console.WriteLine("Can't find your language? Check https://github.com/naplika/kliens")
+            Console.Write("(1): ")
             dim selected as string = console.Readline()
             dim jsonobj = new JsonObject()
             jsonobj.Add("configrev", "1")
             jsonobj.Add("firstStartup", "true")
             jsonobj.Add("user", "guest")
+            jsonobj.Add("customuser", "guest")
             jsonobj.Add("school", "Naplika")
             dim okinput = false
             dim templang = "en"

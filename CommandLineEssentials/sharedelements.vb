@@ -6,7 +6,7 @@ Namespace CommandLineEssentials
             if Program.updatedconfig = true or force Then
                 Program.DecryptConf = FuckMyBytes.SecurityMeasurements.decryptconfig()
                 Program.DecryptAuth = FuckMyBytes.SecurityMeasurements.DecryptAuth()
-                ConsoleSet.Username = GetSettings("user")
+                ConsoleSet.Username = GetSettings("customuser")
                 Consoleset.School = GetSettings("school")
                 ConsoleSet.Whoami = ConsoleSet.Username + "@" + ConsoleSet.School + "> "
                 Program.updatedconfig = False

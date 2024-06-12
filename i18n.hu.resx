@@ -195,4 +195,34 @@
   <data name="auth.nonce.failed" xml:space="preserve">
     <value>Nem sikerült megszerezni a nonce-t, </value>
   </data>
+  <data name="login.cmd" xml:space="preserve">
+    <value>login &lt;felhasználónév&gt; &lt;iskola kód&gt;</value>
+  </data>
+  <data name="help-login" xml:space="preserve">
+    <value>Bejelentkezés egy fiókba</value>
+  </data>
+  <data name="help-logout" xml:space="preserve">
+    <value>Kijelentkezés a jelenlegi fiókból</value>
+  </data>
+  <data name="update.current" xml:space="preserve">
+    <value>Jelen: </value>
+  </data>
+  <data name="update.new" xml:space="preserve">
+    <value>Új: </value>
+  </data>
+  <data name="update.failed" xml:space="preserve">
+    <value>Frissítés lekérése sikertelen: </value>
+  </data>
+  <data name="config.header" xml:space="preserve">
+    <value>Testreszabható beállítások</value>
+  </data>
+  <data name="config.cmd" xml:space="preserve">
+    <value>config &lt;bejegyzés&gt; &lt;érték&gt;</value>
+  </data>
+  <data name="config-language" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="config-customuser" xml:space="preserve">
+    <value>Egyedi felhasználónév</value>
+  </data>
 </root>

@@ -44,7 +44,7 @@ Public MustInherit Class Commandparser
                     End If
                 elseif args(0) = "login" Then
                     if args.Length < 3 Then
-                        Console.WriteLine("login <username> <institutecode>")
+                        Console.WriteLine(SharedElements.GetTranslation("login.cmd", Lang))
                     Else
                         Console.WriteLine(SharedElements.GetTranslation("enter.password", Lang))
                         Dim password As String = SharedElements.ReadPassword()
@@ -53,7 +53,7 @@ Public MustInherit Class Commandparser
                 elseif args(0) = "logout" Then
                     if args.Length < 2 Then
                         Console.WriteLine("logout confirm")
-                    Else
+                    Elseif args.Length = 2 andalso args(1) = "confirm" Then
                         SharedElements.DeleteLogin()
                     End If
                 Else
