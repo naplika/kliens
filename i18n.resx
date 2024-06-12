@@ -84,4 +84,7 @@
     <data name="hello.user" xml:space="preserve">
         <value>Üdv, %s!</value>
     </data>
+    <data name="enter.password" xml:space="preserve">
+        <value>Add meg a jelszavad:</value>
+    </data>
 </root>
