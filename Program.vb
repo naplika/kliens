@@ -113,11 +113,14 @@ Module Program
             value = "1"
         elseif q = "password" Then
             value = "undefined"
+        Else
+            return False
         End If
         confjson(q) = value
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)
         vari = value
+        return True
     End Function
 End Module
