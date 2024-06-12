@@ -5,7 +5,7 @@
 <div style="text-align: center">
 
 ![Crowdin](https://badges.crowdin.net/naplika/localized.svg)
-[Segíts fordítani!](https://crowdin.com/project/naplika)<br>
+[Segíts fordítani!](https://i18n.naplika.mnus.hu/)<br>
 
 <details>
     <summary>Jelenlegi fordítók listája</summary>
