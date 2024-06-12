@@ -7,8 +7,9 @@ Public Module FirstStartup
         dim task as task = task.run(Sub() 
             Console.WriteLine("Welcome to Naplika!")
             Console.WriteLine("Please select a language:")
-            Console.WriteLine("1. Hungarian")
+            Console.WriteLine("1. Hungarian (Magyar)")
             Console.WriteLine("2. English")
+            Console.WriteLine("3. German (Deutsch)")
             Console.WriteLine("Can't find your language? Check https://github.com/naplika/kliens")
             Console.Write("(1): ")
             dim selected as string = console.Readline()
@@ -27,6 +28,10 @@ Public Module FirstStartup
             elseif selected = "2" Then
                 jsonobj.Add("language", "en")
                 templang = "en"
+                okinput = true
+            elseif selected = "3" Then
+                jsonobj.Add("language", "de")
+                templang = "de"
                 okinput = true
             Else
                 Console.Clear()
