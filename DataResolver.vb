@@ -110,13 +110,13 @@ Public MustInherit Class DataResolver
                 dim token as string = json("access_token").ToString()
                 dim tokenparts as String() = token.Split(".")
                 dim signature as string = BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", "")
-                Console.WriteLine("Authorization Signature: " + FuckMyBytes.LengthController(signature, 5))
+                Console.WriteLine(GetTranslation("auth.signature", Lang) + FuckMyBytes.LengthController(signature, 5))
                 dim payload as JObject =
                         JObject.Parse(System.Text.Encoding.UTF8.GetString(SharedElements.Base64UrlDecode(tokenparts(1))))
                 Console.WriteLine(GetTranslation("hello.user", Lang).Replace("%s", payload("name").ToString()))
                 SaveLogin(content, signature, password, username, institutecode)
             Else
-                Console.WriteLine("Failed to authorize, " + response.StatusCode.ToString())
+                Console.WriteLine(GetTranslation("auth.failed", Lang) + response.StatusCode.ToString())
             End If
         end sub)
         return task
@@ -131,7 +131,7 @@ Public MustInherit Class DataResolver
         if response.IsSuccessStatusCode Then
             return response.Content.ReadAsStringAsync().Result
         Else
-            Console.WriteLine("Failed to generate nonce, " + response.StatusCode.ToString())
+            Console.WriteLine(GetTranslation("auth.nonce.failed", Lang) + response.StatusCode.ToString())
             return "fail"
         End If
     End function

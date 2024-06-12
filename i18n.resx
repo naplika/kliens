@@ -87,4 +87,13 @@
     <data name="enter.password" xml:space="preserve">
         <value>Add meg a jelszavad:</value>
     </data>
+    <data name="auth.signature" xml:space="preserve">
+        <value>Hitelesítési aláírás: </value>
+    </data>
+    <data name="auth.failed" xml:space="preserve">
+        <value>Nem sikerült bejelentkezni, </value>
+    </data>
+    <data name="auth.nonce.failed" xml:space="preserve">
+        <value>Nem sikerült megszerezni a nonce-t, </value>
+    </data>
 </root>
