@@ -6,7 +6,7 @@
 [Segíts fordítani!](https://crowdin.com/project/naplika)<br>
 <details>
     <summary>Jelenlegi fordítók listája</summary>
-    - [Zan](https://github.com/Zan1456)
+    <a href="https://github.com/Zan1456">Zan</a>
 
 </details>
 
