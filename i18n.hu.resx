@@ -225,4 +225,13 @@
   <data name="config-customuser" xml:space="preserve">
     <value>Egyedi felhasználónév</value>
   </data>
+  <data name="auth.refresh.relog" xml:space="preserve">
+    <value>Kérlek jelentkezz be újra.</value>
+  </data>
+  <data name="auth.token.deleted" xml:space="preserve">
+    <value>Refresh token törölve.</value>
+  </data>
+  <data name="auth.token.delete.failed" xml:space="preserve">
+    <value>Refresh token törlése sikertelen: </value>
+  </data>
 </root>

@@ -173,6 +173,10 @@ Public MustInherit Class DataResolver
                     dim signature as string = BitConverter.ToString(Base64UrlDecode(tokenparts(2))).Replace("-", "")
                     dim username as string = GetSettings("user")
                     dim password as string = GetSettings("password")
+                    if password = "undefined" Then
+                        Console.WriteLine(GetTranslation("auth.refresh.relog", Lang))
+                        exit sub
+                    End If
                     SaveLogin(content, signature, password, username, instituteCode)
                 Else 
                     dim username as string = GetSettings("user")
@@ -181,6 +185,27 @@ Public MustInherit Class DataResolver
                 End If
             End If
             end sub)
+        return task
+    End function
+    
+    public shared function DeleteToken() as Task
+        dim task as task = task.Run(sub()
+            Client.DefaultRequestHeaders.Remove("User-Agent")
+            Client.DefaultRequestHeaders.Add("User-Agent", UserAgent.ToString())
+            dim url as string = "https://idp.e-kreta.hu/connect/revocation"
+            dim clientid as string = "kreta-ellenorzo-mobile-android"
+            dim refreshToken as string = JObject.Parse(DecryptAuth)("refresh").ToString()
+            dim response as HttpResponseMessage =
+                    client.PostAsync(url, new FormUrlEncodedContent(New Dictionary(Of String, String) From {
+                                                                       {"token", refreshToken},
+                                                                       {"client_id", clientid}
+                                                                       })).Result
+            if response.IsSuccessStatusCode Then
+                Console.WriteLine(GetTranslation("auth.token.deleted", Lang))
+            Else
+                Console.WriteLine(GetTranslation("auth.token.delete.failed", Lang) + response.StatusCode.ToString())
+            End If
+        end sub)
         return task
     End function
 End Class

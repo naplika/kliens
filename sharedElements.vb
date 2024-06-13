@@ -269,6 +269,7 @@ End function
         json("school") = "Naplika"
         json("customuser") = "guest"
         json("password") = "undefined"
+        DataResolver.DeleteToken().Wait()
         dim jstring as string = json.ToString()
         jstring = FuckMyBytes.FuckString(jstring, program.Uniquepass)
         File.WriteAllText(Settingspath, jstring)
