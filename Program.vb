@@ -1,10 +1,13 @@
 Imports System
 Imports System.IO
+Imports System.Net.Http
+Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
 imports kliens.FuckMyBytes
 Imports System.Threading
 imports Mindmagma.Curses
+imports Newtonsoft.Json
 
 #Disable Warning BC42016
 
@@ -18,6 +21,8 @@ Module Program
     public Screen = NCurses.InitScreen()
     
     Sub Main()
+        ' Handle crashes
+        AddHandler System.AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
         NCurses.NoDelay(Screen, True)
         NCurses.NoEcho()
         NCurses.Refresh()
@@ -52,6 +57,24 @@ Module Program
         CommandLineEssentials.Base.CommandMode()
     End Sub
 
+    private sub CurrentDomain_UnhandledException(sender as Object, e as UnhandledExceptionEventArgs)
+        Dim exception as Exception = DirectCast(e.ExceptionObject, Exception)
+        sendStacktrace(exception.ToString())
+    End sub
+    
+    private sub sendStacktrace(exception as String)
+            using webclient as new HttpClient()
+                Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception}}
+                Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
+                dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
+                dim response as HttpResponseMessage = webclient.Postasync("http://localhost:3000/", content).Result
+            End Using
+    End sub
+    
+    public Sub CrashApp()
+        Throw New Exception("Test")
+    End Sub
+    
     Private function FirstStartupCheck() as task
         dim task as task = task.Run(Sub()
             if File.Exists(Settingspath) Then
