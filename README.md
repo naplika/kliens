@@ -1,4 +1,5 @@
-<img src="https://github.com/naplika/kliens/assets/82440273/0d6a53a0-8a31-4686-bf54-9662fb8d1dc9">
+<img src="https://github.com/naplika/kliens/assets/82440273/1770c2f5-8196-4c0e-80c3-abcf9933d2e0">
+
 
 <h1>Alternatív Kréta kliens parancssorra.</h1>
 
