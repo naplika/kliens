@@ -35,6 +35,8 @@ Public MustInherit Class Commandparser
                         IO.File.WriteAllText(SharedElements.GetStartupPath() + "authorization.dec.json", DecryptAuth)
                         Console.WriteLine("Authorisation dump decrypted.")
                         Environment.Exit(0)
+                    elseif args.Length >= 2 AndAlso args(1) = "crash" Then
+                        Program.CrashApp()
                     End If
                 elseif args(0) = "config" then
                     if args.Length < 2 Then
