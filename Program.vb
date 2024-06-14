@@ -9,7 +9,6 @@ imports kliens.FuckMyBytes
 Imports System.Threading
 imports Mindmagma.Curses
 imports Newtonsoft.Json
-Imports Org.BouncyCastle.Asn1.Cmp
 
 #Disable Warning BC42016
 
@@ -20,7 +19,7 @@ Module Program
     public DecryptConf as string
     public DecryptAuth as string
     private _internetavail as Boolean = true
-    public Screen = NCurses.InitScreen()
+    private ReadOnly Screen = NCurses.InitScreen()
     
     Sub Main()
         ' Handle crashes
@@ -61,11 +60,11 @@ Module Program
 
     private sub CurrentDomain_UnhandledException(sender as Object, e as UnhandledExceptionEventArgs)
         Dim exception as Exception = DirectCast(e.ExceptionObject, Exception)
-        sendStacktrace(exception.ToString())
+        SendStacktrace(exception.ToString())
         Console.WriteLine("Your copy of Naplika has crashed.")
     End sub
     
-    private sub sendStacktrace(exception as String)
+    private sub SendStacktrace(exception as String)
             using webclient as new HttpClient()
                 webclient.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #ErrorReporter")
                 dim osver as String = Environment.OSVersion.ToString()
@@ -75,7 +74,7 @@ Module Program
                 Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver},{"errTitle", exceptiontitle}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                dim response as HttpResponseMessage = webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content).Result
+                webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content).Result
             End Using
     End sub
     
@@ -127,7 +126,7 @@ Module Program
         end try
     End function
     
-    public Function TryToRegen(q as String, byref vari as String) As Boolean
+    private Function TryToRegen(q as String, byref vari as String) As Boolean
         dim confjson as JObject = JObject.Parse(DecryptConf)
         dim value as String
         if q = "language" Then
