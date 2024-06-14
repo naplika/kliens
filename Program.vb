@@ -64,10 +64,11 @@ Module Program
     
     private sub sendStacktrace(exception as String)
             using webclient as new HttpClient()
+                webclient.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #ErrorReporter")
                 Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                dim response as HttpResponseMessage = webclient.Postasync("http://localhost:3000/", content).Result
+                dim response as HttpResponseMessage = webclient.Postasync("http://localhost:3500/api/v1/stacktrace", content).Result
             End Using
     End sub
     
