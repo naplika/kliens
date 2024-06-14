@@ -73,7 +73,7 @@ Module Program
                 Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                dim response as HttpResponseMessage = webclient.Postasync("http://naplika.mnus.hu/api/v1/stacktrace", content).Result
+                dim response as HttpResponseMessage = webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content).Result
             End Using
     End sub
     
