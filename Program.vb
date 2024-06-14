@@ -19,7 +19,7 @@ Module Program
     public DecryptConf as string
     public DecryptAuth as string
     private _internetavail as Boolean = true
-    private ReadOnly Screen = NCurses.InitScreen()
+    private ReadOnly Screen as IntPtr = NCurses.InitScreen()
     
     Sub Main()
         ' Handle crashes
@@ -116,7 +116,7 @@ Module Program
             dim jsonobject as jobject = JObject.Parse(jsonstring)
             return jsonobject(q).ToString()
         catch ex as Exception
-            dim regen as string
+            dim regen as string = ""
             if TryToRegen(q, regen) = True Then
                 return regen
             Else
