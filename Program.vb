@@ -62,6 +62,7 @@ Module Program
     private sub CurrentDomain_UnhandledException(sender as Object, e as UnhandledExceptionEventArgs)
         Dim exception as Exception = DirectCast(e.ExceptionObject, Exception)
         sendStacktrace(exception.ToString())
+        Console.WriteLine("Your copy of Naplika has crashed.")
     End sub
     
     private sub sendStacktrace(exception as String)
@@ -70,7 +71,8 @@ Module Program
                 dim osver as String = Environment.OSVersion.ToString()
                 dim ostype as String = RuntimeInformation.OSDescription.ToString()
                 dim appver as String = SharedElements.GenLocalVer()
-                Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver}}
+                dim exceptiontitle as string = exception.Split(New String() {": "}, StringSplitOptions.None)(2).ReplaceLineEndings(vbCrLf).Split(vbCrLf, StringSplitOptions.None)(0)
+                Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver},{"errTitle", exceptiontitle}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
                 dim response as HttpResponseMessage = webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content).Result
@@ -78,7 +80,7 @@ Module Program
     End sub
     
     public Sub CrashApp()
-        Throw New Exception("Test")
+        Throw New Exception("THIS IS A TEST")
     End Sub
     
     Private function FirstStartupCheck() as task
