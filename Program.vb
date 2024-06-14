@@ -1,6 +1,7 @@
 Imports System
 Imports System.IO
 Imports System.Net.Http
+Imports System.Runtime.InteropServices
 Imports System.Text
 imports newtonsoft.json.linq
 imports kliens.SharedElements
@@ -8,6 +9,7 @@ imports kliens.FuckMyBytes
 Imports System.Threading
 imports Mindmagma.Curses
 imports Newtonsoft.Json
+Imports Org.BouncyCastle.Asn1.Cmp
 
 #Disable Warning BC42016
 
@@ -65,10 +67,13 @@ Module Program
     private sub sendStacktrace(exception as String)
             using webclient as new HttpClient()
                 webclient.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #ErrorReporter")
-                Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception}}
+                dim osver as String = Environment.OSVersion.ToString()
+                dim ostype as String = RuntimeInformation.OSDescription.ToString()
+                dim appver as String = SharedElements.GenLocalVer()
+                Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                dim response as HttpResponseMessage = webclient.Postasync("http://localhost:3500/api/v1/stacktrace", content).Result
+                dim response as HttpResponseMessage = webclient.Postasync("http://naplika.mnus.hu/api/v1/stacktrace", content).Result
             End Using
     End sub
     

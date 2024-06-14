@@ -202,7 +202,7 @@ End function
         End If
     End Function
 
-    private Shared Function GenLocalVer() As String
+    public Shared Function GenLocalVer() As String
         dim version as string = Assembly.GetExecutingAssembly().GetName().Version.ToString()
         ' let's assume the version it returns is 1.0.0.0
         version = version.Replace(".0", "")
