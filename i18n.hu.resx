@@ -154,7 +154,7 @@
     <value>Internet nem elérhető, az aktuális adatok elavultak lehetnek.</value>
   </data>
   <data name="schools.cmd">
-    <value>schools &lt;iskola név vagy kód&gt;</value>
+    <value>schools &amp;lt;iskola név vagy kód&amp;gt;</value>
   </data>
   <data name="update.avaiable">
     <value>Új frissítés érhető el, frissíts a legjobb élmény érdekében.</value>
@@ -183,46 +183,46 @@
   <data name="hello.user">
     <value>Üdv, %s!</value>
   </data>
-  <data name="enter.password" xml:space="preserve">
+  <data name="enter.password">
     <value>Add meg a jelszavad:</value>
   </data>
-  <data name="auth.signature" xml:space="preserve">
+  <data name="auth.signature">
     <value>Hitelesítési aláírás: </value>
   </data>
-  <data name="auth.failed" xml:space="preserve">
+  <data name="auth.failed">
     <value>Nem sikerült bejelentkezni, </value>
   </data>
-  <data name="auth.nonce.failed" xml:space="preserve">
+  <data name="auth.nonce.failed">
     <value>Nem sikerült megszerezni a nonce-t, </value>
   </data>
-  <data name="login.cmd" xml:space="preserve">
-    <value>login &lt;felhasználónév&gt; &lt;iskola kód&gt;</value>
+  <data name="login.cmd">
+    <value>login &amp;lt;felhasználónév&amp;gt; &amp;lt;iskola kód&amp;gt;</value>
   </data>
-  <data name="help-login" xml:space="preserve">
+  <data name="help-login">
     <value>Bejelentkezés egy fiókba</value>
   </data>
-  <data name="help-logout" xml:space="preserve">
+  <data name="help-logout">
     <value>Kijelentkezés a jelenlegi fiókból</value>
   </data>
-  <data name="update.current" xml:space="preserve">
+  <data name="update.current">
     <value>Jelen: </value>
   </data>
-  <data name="update.new" xml:space="preserve">
+  <data name="update.new">
     <value>Új: </value>
   </data>
-  <data name="update.failed" xml:space="preserve">
+  <data name="update.failed">
     <value>Frissítés lekérése sikertelen: </value>
   </data>
-  <data name="config.header" xml:space="preserve">
+  <data name="config.header">
     <value>Testreszabható beállítások</value>
   </data>
-  <data name="config.cmd" xml:space="preserve">
-    <value>config &lt;bejegyzés&gt; &lt;érték&gt;</value>
+  <data name="config.cmd">
+    <value>config &amp;lt;bejegyzés&amp;gt; &amp;lt;érték&amp;gt;</value>
   </data>
-  <data name="config-language" xml:space="preserve">
+  <data name="config-language">
     <value>Nyelv</value>
   </data>
-  <data name="config-customuser" xml:space="preserve">
+  <data name="config-customuser">
     <value>Egyedi felhasználónév</value>
   </data>
 </root>
