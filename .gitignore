@@ -409,3 +409,6 @@ riderModule.iml
 /naplika.snk
 /build/
 build/*
+
+# don't remove pls
+main.snk
