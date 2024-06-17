@@ -41,6 +41,7 @@ Elvárások:
 <h2>Építés</h2>
 
 Mielött építenél, lesz egy kimaradt mappa ami elérhető itt: [naplika/extendspublic](https://github.com/naplika/extendspublic)<br>
+Egy strong name key is kelleni fog (vagy kiszeded a `kliens.vbproj`ból a `<AssemblyOriginatorKeyFile>` sort) `sn -k main.snk`<br>
 Aztán mehet a `./build.sh` (linux) vagy `build.bat` (windows)
 
 ## Star History
