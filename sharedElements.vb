@@ -260,7 +260,9 @@ End function
         confjson("school") = school
         ' if you ask it is for reauthenticating in case kreten refresh token expires
         confjson("password") = password
-        confjson("customuser") = name
+        if GetSettings("customuser") = "guest" then
+            confjson("customuser") = name
+        End If
         dim updconf as string = confjson.ToString()
         updconf = FuckMyBytes.FuckString(updconf, program.Uniquepass)
         File.WriteAllText(Settingspath, updconf)
