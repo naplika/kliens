@@ -24,12 +24,12 @@ Module Program
     Sub Main()
         ' Handle crashes
         AddHandler System.AppDomain.CurrentDomain.UnhandledException, AddressOf CurrentDomain_UnhandledException
-        NCurses.NoDelay(Screen, True)
-        NCurses.NoEcho()
-        NCurses.Refresh()
         DecryptConf = SecurityMeasurements.decryptconfig()
         DecryptAuth = SecurityMeasurements.DecryptAuth()
         FirstStartupCheck().Wait()
+        NCurses.NoDelay(Screen, True)
+        NCurses.NoEcho()
+        NCurses.Refresh()
         lang = GetSettings("language")
         DataResolver.GetUserAgent().Wait()
         Console.TreatControlCAsInput = true
@@ -66,6 +66,7 @@ Module Program
     End sub
     
     private sub SendStacktrace(exception as String)
+        ' ez ilyen send & pray szituáció mivel nem tudhatod hogy tényleg elküldi-e
             using webclient as new HttpClient()
                 webclient.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #ErrorReporter")
                 dim osver as String = Environment.OSVersion.ToString()
@@ -75,12 +76,15 @@ Module Program
                 Dim stackTraceDict As New Dictionary(Of String, String) From {{"stackTrace", exception},{"osVersion", osver},{"osType", ostype},{"appVer", appver},{"errTitle", exceptiontitle}}
                 Dim jsonContent As String = JsonConvert.SerializeObject(stackTraceDict)
                 dim content as new StringContent(jsonContent, Encoding.UTF8, "application/json")
-                webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content)
+                dim httpresult = webclient.Postasync("https://naplika.mnus.hu/api/v1/stacktrace", content).Result
+                if httpresult.IsSuccessStatusCode = false Then
+                    console.WriteLine(httpresult.StatusCode.ToString())
+                End If
             End Using
     End sub
     
     public Sub CrashApp()
-        Throw New Exception("THIS IS A TEST")
+        Throw New Exception("User crashed app")
     End Sub
     
     Private function FirstStartupCheck() as task

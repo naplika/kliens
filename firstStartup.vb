@@ -5,12 +5,12 @@ imports kliens.SharedElements
 Public Module FirstStartup
     friend function Welcome() as Task
         dim task as task = task.run(Sub() 
-            Console.WriteLine("Welcome to Naplika!")
-            Console.WriteLine("Please select a language:")
-            Console.WriteLine("1. Hungarian (Magyar)")
-            Console.WriteLine("2. English")
-            Console.WriteLine("3. German (Deutsch)")
-            Console.WriteLine("Can't find your language? Check https://github.com/naplika/kliens")
+            Console.Write("Welcome to Naplika!" + vbCrLf)
+            Console.Write("Please select a language:" + vbCrLf)
+            Console.Write("1. Hungarian (Magyar)" + vbCrLf)
+            Console.Write("2. English" + vbCrLf)
+            Console.Write("3. German (Deutsch)" + vbCrLf)
+            Console.Write("Can't find your language? Check https://github.com/naplika/kliens" + vbCrLf)
             Console.Write("(1): ")
             dim selected as string = console.Readline()
             dim jsonobj = new JsonObject()
