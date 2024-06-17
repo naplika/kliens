@@ -35,7 +35,7 @@ Elvárások:
 - Legyen internet kapcsolata
 - Elbírja az encryptort (1.9GHz-s gépen tesztelve)
 - x64 (amd64) képes processzor és rendszer
-- minimum 20MiB ram (rendszer nincs bele számítva)
+- minimum 100MB ram (rendszer nincs bele számítva)
 - .NET 8 (Ha self-buildelsz)
 
 <h2>Építés</h2>

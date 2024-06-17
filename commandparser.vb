@@ -46,7 +46,7 @@ Public MustInherit Class Commandparser
                     if args.Length < 2 Then
                         SharedElements.printconfigables()
                     Elseif args.Length >= 3 Then
-                        dim void
+                        dim void as String = ""
                         Program.TryToRegen(args(1), void, args(2))
                     End If
                 elseif args(0) = "login" Then
