@@ -17,12 +17,11 @@ Friend MustInherit Class SharedElements
     public shared ReadOnly Loginpath as string = GetStartupPath() + "authorization.json"
 
     Public shared Function GetStartupPath() As String
-        dim path as string = IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-        if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-            path = path + "\"
-        Else
-            path = path + "/"
-        End if
+        Dim homePath As String = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+        Dim path As String = homePath + GetSlashDirection() + ".naplika" + GetSlashDirection()
+        if not Directory.Exists(path) Then
+            Directory.CreateDirectory(path)
+        End If
         Return path
     End Function
 

@@ -37,7 +37,7 @@ Public MustInherit Class Commandparser
                         Console.WriteLine("Authorisation dump decrypted.")
                         Environment.Exit(0)
                     elseif args.Length >= 2 andalso args(1) = "pubkey" Then
-                            SecurityMeasurements.CheckFingerprint(true)
+                        SecurityMeasurements.CheckFingerprint(true)
                     elseif args.Length >= 2 AndAlso args(1) = "crash" Then
                         Console.WriteLine("The app crashes now and it will be your fault.")
                         Program.CrashApp()
