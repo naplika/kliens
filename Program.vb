@@ -131,7 +131,7 @@ Module Program
         end try
     End function
     
-    private Function TryToRegen(q as String, byref vari as String) As Boolean
+    public Function TryToRegen(q as String, byref vari as String, Optional ovalue as String = Nothing) As Boolean
         dim confjson as JObject = JObject.Parse(DecryptConf)
         dim value as String
         if q = "language" Then
@@ -150,6 +150,9 @@ Module Program
             value = "undefined"
         Else
             return False
+        End If
+        if ovalue.Length > 0 Then
+            value = ovalue
         End If
         confjson(q) = value
         dim updconf as string = confjson.ToString()

@@ -45,8 +45,9 @@ Public MustInherit Class Commandparser
                 elseif args(0) = "config" then
                     if args.Length < 2 Then
                         SharedElements.printconfigables()
-                    Else
-                        Console.WriteLine("forgor to make config feature")
+                    Elseif args.Length >= 3 Then
+                        dim void
+                        Program.TryToRegen(args(1), void, args(2))
                     End If
                 elseif args(0) = "login" Then
                     if args.Length < 3 Then
