@@ -7,7 +7,7 @@ Public MustInherit Class Commandparser
     public shared Function Parsecommand(args as String()) as Task
         dim task as task = task.run(Sub()
             if args.Length > 0 Then
-                if args(0) = "exit" Then
+                if args(0) = "exit" or args(0) = "kys" Then
                     cmd_exit()
 
                 elseif args(0) = "clear" or args(0) = "cls" Then
@@ -46,7 +46,7 @@ Public MustInherit Class Commandparser
                     if args.Length < 2 Then
                         SharedElements.printconfigables()
                     Else
-
+                        Console.WriteLine("forgor to make config feature")
                     End If
                 elseif args(0) = "login" Then
                     if args.Length < 3 Then
