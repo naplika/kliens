@@ -18,7 +18,7 @@ Module Program
     public Lang as String
     public DecryptConf as string
     public DecryptAuth as string
-    private _internetavail as Boolean = true
+    public Internetavail as Boolean = true
     private ReadOnly Screen as IntPtr = NCurses.InitScreen()
     
     Sub Main()
@@ -36,10 +36,10 @@ Module Program
         Console.Clear()
         Console.WriteLine(GetTranslation("welcome", Lang))
         if SharedElements.CheckInternetConnection() = false Then
-            _internetavail = False
+            Internetavail = False
             Console.WriteLine(GetTranslation("no.internet", Lang))
         End If
-        if _internetavail = true Then
+        if Internetavail = true Then
             dim updatecheck = updateChecker()
             if updateCheck = false Then
                 dim fails = 0
@@ -54,6 +54,7 @@ Module Program
             End If
             DataResolver.Refresh().Wait()
         End If
+        FuckMyBytes.SecurityMeasurements.CheckFingerprint()
         extends.ExMain.InitExtensions()
         CommandLineEssentials.Base.CommandMode()
     End Sub

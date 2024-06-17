@@ -1,4 +1,5 @@
 ﻿imports kliens.DataResolver
+Imports kliens.FuckMyBytes
 
 #Disable Warning BC42021
 
@@ -35,6 +36,8 @@ Public MustInherit Class Commandparser
                         IO.File.WriteAllText(SharedElements.GetStartupPath() + "authorization.dec.json", DecryptAuth)
                         Console.WriteLine("Authorisation dump decrypted.")
                         Environment.Exit(0)
+                    elseif args.Length >= 2 andalso args(1) = "pubkey" Then
+                            SecurityMeasurements.CheckFingerprint(true)
                     elseif args.Length >= 2 AndAlso args(1) = "crash" Then
                         Console.WriteLine("The app crashes now and it will be your fault.")
                         Program.CrashApp()

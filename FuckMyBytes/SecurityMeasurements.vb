@@ -1,7 +1,9 @@
 Imports System.IO
 imports System.Runtime.InteropServices
+Imports System.Security.Cryptography
 imports kliens.SharedElements
 imports System.Text
+imports Mono.cecil
 
 #Disable Warning BC42021
 #Disable Warning BC42016
@@ -117,6 +119,34 @@ Namespace FuckMyBytes
             dim output as string = FuckString(config, program.Uniquepass)
             IO.File.WriteAllText(Settingspath, output)
             return true
+        End function
+        
+        public function CheckFingerprint(Optional printHash as Boolean = False)
+            Dim assemblyPath As String = GetType(Program).Assembly.Location
+            Dim knownHash As String = DataResolver.GetPubKey()
+            
+            Dim assemblyDefinition = Mono.Cecil.AssemblyDefinition.ReadAssembly(assemblyPath)
+            Dim publicKey = assemblyDefinition.Name.PublicKey
+            
+            Using hasher As SHA256 = SHA256.Create()
+                Dim hash As Byte() = hasher.ComputeHash(publicKey)
+                Dim hashString As String = BitConverter.ToString(hash).Replace("-", String.Empty)
+                
+                if printHash = true Then
+                    Console.WriteLine(hashString)
+                End If
+                
+                if knownHash = "fail" Then
+                    console.WriteLine(GetTranslation("pubkey.fail", Lang))
+                    Exit Function
+                End If
+                if hashString.Equals(knownHash, StringComparison.OrdinalIgnoreCase) Then
+                    Exit Function
+                Else 
+                    Console.WriteLine(GetTranslation("pubkey.notequal", Lang))
+                    Exit Function
+                End If
+            End Using
         End function
     End Module
 End Namespace

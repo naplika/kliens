@@ -234,4 +234,10 @@
   <data name="auth.token.delete.failed" xml:space="preserve">
     <value>Refresh token törlése sikertelen: </value>
   </data>
+  <data name="pubkey.fail" xml:space="preserve">
+    <value>Nem sikerült ellenőrizni a program intengritását.</value>
+  </data>
+  <data name="pubkey.notequal" xml:space="preserve">
+    <value>A program aláírása nem egyezik az eredetivel. (Lehet hogy más építette?)</value>
+  </data>
 </root>

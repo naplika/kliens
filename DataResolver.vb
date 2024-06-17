@@ -10,6 +10,7 @@ Public MustInherit Class DataResolver
     private shared ReadOnly Client as HttpClient = new HttpClient()
     private shared readonly Schoolspath as string = GetStartupPath() + "schools.json"
     public shared UserAgent as string = ""
+    
     public shared function SearchSchool(query as string) as Task
         dim task as task = task.Run(Sub()
             dim schooldata as string
@@ -207,5 +208,22 @@ Public MustInherit Class DataResolver
             End If
         end sub)
         return task
+    End function
+    
+    public shared function GetPubKey() as string
+        dim pubkey as string
+        if Internetavail = false Then
+            pubkey = "fail"
+            return pubkey
+        End If
+            Client.DefaultRequestHeaders.Add("User-Agent", "Naplika/v1 #PubKey")
+            dim response as HttpResponseMessage = Client.GetAsync("https://naplika.mnus.hu/api/v1/pubkey").Result
+            if response.IsSuccessStatusCode Then
+                pubkey = response.Content.ReadAsStringAsync().Result
+            Else
+                pubkey = "fail"
+            End If
+            Client.DefaultRequestHeaders.Remove("User-Agent")
+        return pubkey
     End function
 End Class
