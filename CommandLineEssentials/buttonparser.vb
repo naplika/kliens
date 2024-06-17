@@ -10,7 +10,7 @@ Namespace CommandLineEssentials
             Command.Clear()
             CursorPos = 0
             for i = 0 to CommandArray.Length - 1
-                LastCommand += CommandArray(i) + " "
+                LastCommand = CommandArray(i) + " "
             Next
             LastCommand = LastCommand.TrimEnd(CType(" ", Char))
             Base.CommandMode(LastCommand)
