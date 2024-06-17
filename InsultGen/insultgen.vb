@@ -6,7 +6,7 @@ imports System.Linq
 Namespace InsultGen
     Public Module Main
         private ReadOnly _
-            DirtyWords as string = SharedElements.GetStartupPath() + "InsultGen" + SharedElements.getSlashDirection() +
+            DirtyWords as string = SharedElements.GetApplicationPath() + "InsultGen" + SharedElements.getSlashDirection() +
                                    "dirtywords.xml"
 
         public Function Insult() As String

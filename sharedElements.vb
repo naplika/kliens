@@ -25,6 +25,12 @@ Friend MustInherit Class SharedElements
         Return path
     End Function
 
+    public shared function GetApplicationPath() as string
+        Dim fullPath As String = Assembly.GetExecutingAssembly().Location
+        Dim directoryPath As String = Directory.GetParent(fullPath).FullName
+        Return directoryPath + GetSlashDirection()
+    End function
+    
     public shared function GetSlashDirection() as String
         if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             return "\"
