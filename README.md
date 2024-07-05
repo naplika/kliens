@@ -44,12 +44,4 @@ Mielött építenél, lesz egy kimaradt mappa ami elérhető itt: [naplika/exten
 Egy strong name key is kelleni fog (vagy kiszeded a `kliens.vbproj`ból a `<AssemblyOriginatorKeyFile>` sort) `sn -k main.snk`<br>
 Aztán mehet a `./build.sh` (linux) vagy `build.bat` (windows)
 
-## Star History
-
-<a href="https://star-history.com/#naplika/kliens&Timeline">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=naplika/kliens&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=naplika/kliens&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=naplika/kliens&type=Timeline" />
- </picture>
-</a>
+Api ping:<br>![api ping](https://status.mnus.hu/api/badge/4/ping/24?suffix=+ms&color=%23384B55&labelColor=%231E2326&style=for-the-badge)
