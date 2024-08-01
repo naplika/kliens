@@ -225,4 +225,19 @@
   <data name="config-customuser">
     <value>Custom username</value>
   </data>
+  <data name="auth.refresh.relog">
+    <value>Kérlek jelentkezz be újra.</value>
+  </data>
+  <data name="auth.token.deleted">
+    <value>Refresh token törölve.</value>
+  </data>
+  <data name="auth.token.delete.failed">
+    <value>Refresh token törlése sikertelen: </value>
+  </data>
+  <data name="pubkey.fail">
+    <value>Nem sikerült ellenőrizni a program intengritását.</value>
+  </data>
+  <data name="pubkey.notequal">
+    <value>A program aláírása nem egyezik az eredetivel. (Lehet hogy más építette?)</value>
+  </data>
 </root>
